@@ -21,112 +21,87 @@ export default function Home() {
   };
 
   if (!mounted) {
-    // Keep a dark background during hydration/loading to prevent flash
-    return <div className="min-h-screen bg-zinc-950" />;
+    return <div className="min-h-screen bg-brand-black" />;
   }
+
+  const services = [
+    {
+      name: "Websites & Web Apps",
+      desc: "Custom marketing platforms and rich application interfaces.",
+    },
+    {
+      name: "Mobile Applications",
+      desc: "Native and cross-platform experiences for iOS and Android.",
+    },
+    {
+      name: "Systems (CRM / ERP)",
+      desc: "Tailored databases and internal workflow automation.",
+    },
+    {
+      name: "Branding & Identity",
+      desc: "Visual guidelines, logos, and coherent corporate design.",
+    },
+    {
+      name: "Marketing & Strategy",
+      desc: "Search visibility, optimization, and conversion consulting.",
+    },
+  ];
 
   return (
     <>
       {showIntro && <IntroScreen onComplete={handleIntroComplete} />}
 
-      <div className="relative min-h-screen bg-zinc-950 text-zinc-100 flex flex-col items-center justify-center px-4 overflow-hidden selection:bg-purple-500/30 selection:text-purple-200">
-        {/* Subtle grid background */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f29370a_1px,transparent_1px),linear-gradient(to_bottom,#1f29370a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
-        
-        {/* Radial background glowing spotlight */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-purple-900/10 rounded-full blur-[120px] pointer-events-none animate-pulse duration-[8000ms]" />
+      <div className="relative min-h-screen bg-brand-black text-brand-light flex flex-col items-center justify-center px-6 py-24 selection:bg-brand-navy selection:text-brand-light">
 
-        {/* Content wrapper with fade-in animation */}
-        <main className={`relative z-10 max-w-5xl w-full flex flex-col items-center text-center space-y-16 px-4 py-20 transition-all duration-1000 ${
-          showIntro ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
-        }`}>
-          
-          {/* Header Section */}
-          <div className="space-y-6 max-w-3xl">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-purple-500/20 bg-purple-950/20 text-[10px] tracking-widest font-mono uppercase text-purple-300">
-              <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
-              <span>Version 4.0 // ACTIVE</span>
+        <main
+          className={`relative z-10 max-w-4xl w-full flex flex-col items-center text-center space-y-12 transition-opacity duration-700 ${
+            showIntro ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          {/* Header */}
+          <div className="space-y-4">
+            <div className="inline-block px-3 py-1 rounded bg-brand-navy text-brand-light text-[10px] tracking-widest font-mono uppercase border border-brand-slate/20">
+              Under Construction
             </div>
-            
-            <h1 className="font-serif text-5xl md:text-7xl font-extralight tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-100 to-zinc-400">
-              A New Paradigm of <br />
-              <span className="font-normal italic text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-indigo-200 to-zinc-200">
-                Web Synthesis
-              </span>
+
+            <h1 className="font-serif text-4xl md:text-6xl font-light tracking-wide text-brand-light">
+              FOURTH EDITION
             </h1>
-            
-            <p className="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-light">
-              Welcome to the next iteration of intelligent interfaces. The Fourth Edition compiles dynamic ideas into visual systems with absolute precision.
+
+            <p className="text-brand-slate text-sm md:text-base max-w-md mx-auto leading-relaxed font-light">
+              A software house building modern digital products. We are crafting
+              our new site.
             </p>
           </div>
 
-          {/* Interactive Feature Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl text-left">
-            
-            {/* Card 1 */}
-            <div className="group relative p-8 rounded-xl border border-zinc-800/80 bg-zinc-900/20 backdrop-blur-sm overflow-hidden hover:border-purple-500/30 transition-all duration-500">
-              <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-purple-500/0 via-purple-500/0 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative z-10 space-y-4">
-                <div className="font-mono text-xs text-purple-400 tracking-wider">01 // NEURAL CORE</div>
-                <h3 className="text-lg font-medium text-zinc-100 group-hover:text-purple-300 transition-colors duration-300">Dynamic Synthesizer</h3>
-                <p className="text-zinc-500 text-xs leading-relaxed">
-                  Real-time compilation engines processing vector configurations and layout grids instantly.
+          {/* Offerings Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl text-left pt-4">
+            {services.map((svc, i) => (
+              <div
+                key={i}
+                className="p-5 rounded border border-brand-navy/60 bg-brand-navy/10 hover:border-brand-slate/40 transition-colors duration-300"
+              >
+                <h3 className="text-sm font-medium text-brand-light mb-1">
+                  {svc.name}
+                </h3>
+                <p className="text-brand-slate text-xs leading-relaxed">
+                  {svc.desc}
                 </p>
-                <div className="pt-2">
-                  <span className="font-mono text-[10px] text-zinc-400 group-hover:text-zinc-200 tracking-wider inline-flex items-center transition-colors">
-                    EXECUTE STACK <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
-                  </span>
-                </div>
               </div>
-            </div>
-
-            {/* Card 2 */}
-            <div className="group relative p-8 rounded-xl border border-zinc-800/80 bg-zinc-900/20 backdrop-blur-sm overflow-hidden hover:border-purple-500/30 transition-all duration-500">
-              <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-purple-500/0 via-purple-500/0 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative z-10 space-y-4">
-                <div className="font-mono text-xs text-purple-400 tracking-wider">02 // LATTICE LINK</div>
-                <h3 className="text-lg font-medium text-zinc-100 group-hover:text-purple-300 transition-colors duration-300">Synchronized Node</h3>
-                <p className="text-zinc-500 text-xs leading-relaxed">
-                  Federated pipeline for cloud asset delivery with local database cache optimization.
-                </p>
-                <div className="pt-2">
-                  <span className="font-mono text-[10px] text-zinc-400 group-hover:text-zinc-200 tracking-wider inline-flex items-center transition-colors">
-                    CONNECT NODE <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 3 */}
-            <div className="group relative p-8 rounded-xl border border-zinc-800/80 bg-zinc-900/20 backdrop-blur-sm overflow-hidden hover:border-purple-500/30 transition-all duration-500">
-              <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-purple-500/0 via-purple-500/0 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative z-10 space-y-4">
-                <div className="font-mono text-xs text-purple-400 tracking-wider">03 // CRYPTO KEY</div>
-                <h3 className="text-lg font-medium text-zinc-100 group-hover:text-purple-300 transition-colors duration-300">Security Vault</h3>
-                <p className="text-zinc-500 text-xs leading-relaxed">
-                  Encrypted authorization logs and user settings secured via edge runtime protocols.
-                </p>
-                <div className="pt-2">
-                  <span className="font-mono text-[10px] text-zinc-400 group-hover:text-zinc-200 tracking-wider inline-flex items-center transition-colors">
-                    DECRYPT KEYS <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-
+            ))}
           </div>
 
-          {/* Interactive Reset Intro Button */}
-          <div className="pt-8">
-            <button
-              onClick={() => {
-                sessionStorage.removeItem("fe_intro_completed");
-                setShowIntro(true);
-              }}
-              className="px-6 py-2.5 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 font-mono text-[10px] tracking-widest text-zinc-400 hover:text-zinc-200 transition-all duration-300 cursor-pointer shadow-lg"
+          {/* Contact CTA */}
+          <div className="pt-6 flex flex-col items-center space-y-4">
+            <p className="text-[11px] font-mono text-brand-slate tracking-wider">
+              HAVE A PROJECT IN MIND? GET IN TOUCH
+            </p>
+            <a
+              href="mailto:hello@fourthedition.co"
+              className="px-6 py-3 rounded bg-brand-navy hover:bg-[#1c2a8c] text-brand-light text-xs font-mono tracking-widest transition-colors shadow-lg border border-brand-slate/20"
             >
-              REPLAY CINEMATIC INTRO_
-            </button>
+              CONTACT_US
+            </a>
           </div>
         </main>
       </div>

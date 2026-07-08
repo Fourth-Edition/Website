@@ -66,7 +66,7 @@ export default function IntroScreen({ onComplete }: IntroScreenProps) {
   const slogan = "Innovating Digital Experiences";
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-brand-deep overflow-hidden">
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-brand-black overflow-hidden">
       {/* perspective enables the 3D page-flip effect on children */}
       <div style={{ perspective: "600px" }}>
         <div

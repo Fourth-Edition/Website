@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #030303;
-  --foreground: #f4f4f5;
+  --background: #080212; /* Brand black – darkest background */
+  --foreground: #EEEEEE; /* Clean off-white */
 }
 
 @theme inline {
@@ -12,9 +12,17 @@
   --font-mono: var(--font-geist-mono);
   --font-space: var(--font-space-mono);
   --font-serif: var(--font-eb-garamond);
+  
+  /* Brand palette */
+  --color-brand-black: #080212; /* New darkest bg */
+  --color-brand-deep: #0F044C;
+  --color-brand-navy: #141E61;
+  --color-brand-slate: #787A91;
+  --color-brand-light: #EEEEEE;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
 }
