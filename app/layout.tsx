@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${spaceMono.variable} h-screen antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${spaceMono.variable} ${ebGaramond.variable} h-screen antialiased`}
     >
       <body className={`${spaceMono.className} min-h-screen flex flex-col`}>
         <NavBar />
