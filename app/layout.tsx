@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Space_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Space_Mono, EB_Garamond } from "next/font/google";
 import "./globals.css";
+import NavBar from "./components/navbar";
+import Footer from "./components/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,6 +25,12 @@ const spaceMono = Space_Mono({
   weight: ["400", "700"],
 });
 
+const ebGaramond = EB_Garamond({
+  variable: "--font-eb-garamond",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,15 +42,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${spaceMono.variable} h-screen antialiased`}
     >
       <body className={`${spaceMono.className} min-h-screen flex flex-col`}>
-        <nav className="flex flex-row justify-between items-center w-full py-4 px-16 bg-white dark:bg-zinc-900 border-b border-zinc-100 dark:border-zinc-800">
-          <div className="text-lg font-bold">My App</div>
-        </nav>
+        <NavBar />
         <main className="flex-grow flex flex-col">{children}</main>
-        <footer className="flex flex-row justify-between items-center w-full py-4 px-16 bg-white dark:bg-zinc-900 border-t border-zinc-100 dark:border-zinc-800">
-          <div className="text-sm text-zinc-500">
-            © {new Date().getFullYear()} My App. All rights reserved.
-          </div>
-        </footer>
+        <Footer />
       </body>
     </html>
   );
