@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { geistMono } from "../fonts";
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -93,8 +94,7 @@ export default function NavBar() {
       {/* Brand */}
       <a
         href="/"
-        className="font-serif italic text-lg text-brand-light tracking-wide"
-        style={{ fontFamily: "var(--font-eb-garamond)" }}
+        className={`${geistMono.className} text-lg text-brand-light tracking-wide`}
       >
         Fourth Edition
       </a>

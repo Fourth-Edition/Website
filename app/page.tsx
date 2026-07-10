@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import IntroScreen from "./components/IntroScreen";
+import { geistMono } from "./fonts";
+import Image from "next/image";
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
@@ -51,15 +53,15 @@ export default function Home() {
     <>
       {showIntro && <IntroScreen onComplete={handleIntroComplete} />}
 
-      <div className="relative min-h-screen bg-brand-black text-brand-light flex flex-col items-center justify-center px-6 py-24 selection:bg-brand-navy selection:text-brand-light">
+      <div className="relative min-h-screen  flex flex-col items-center justify-center px-6 py-24  w-full">
         <main
-          className={`relative z-10 max-w-4xl w-full flex flex-col items-center text-center space-y-12 transition-opacity duration-700 ${
+          className={`relative z-10  w-full flex flex-col items-center text-center space-y-12 transition-opacity duration-700 ${
             showIntro ? "opacity-0" : "opacity-100"
           }`}
         >
           {/* Header */}
           <div className="space-y-4">
-            <h1 className="font-serif text-4xl md:text-6xl font-light tracking-wide text-brand-light">
+            <h1 className={`${geistMono.className} text-6xl`}>
               FOURTH EDITION
             </h1>
 
@@ -68,9 +70,18 @@ export default function Home() {
               our new site.
             </p>
           </div>
-
+          <div className="flex flex-row w-full">
+            <Image
+              src="/mobile.png"
+              alt="Fourth Edition"
+              width={1400}
+              height={300}
+              className="w-1/2"
+            />
+            <div className="bg-amber-50 w-1/2"> </div>
+          </div>
           {/* Offerings Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl text-left pt-4">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl text-left pt-4">
             {services.map((svc, i) => (
               <div
                 key={i}
@@ -84,7 +95,7 @@ export default function Home() {
                 </p>
               </div>
             ))}
-          </div>
+          </div> */}
 
           {/* Contact CTA */}
           <div className="pt-6 flex flex-col items-center space-y-4">
