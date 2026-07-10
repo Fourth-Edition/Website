@@ -1,4 +1,4 @@
-# Fourth Edition — Under Construction
+# Fourth Edition 
 
 We are a software house specializing in high-performance digital solutions and modern brand design.
 

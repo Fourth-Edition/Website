@@ -16,7 +16,7 @@ export default function Home() {
   }, []);
 
   const handleIntroComplete = () => {
-    sessionStorage.setItem("fe_intro_completed", "true");
+    // sessionStorage.setItem("fe_intro_completed", "true");
     setShowIntro(false);
   };
 
@@ -52,7 +52,6 @@ export default function Home() {
       {showIntro && <IntroScreen onComplete={handleIntroComplete} />}
 
       <div className="relative min-h-screen bg-brand-black text-brand-light flex flex-col items-center justify-center px-6 py-24 selection:bg-brand-navy selection:text-brand-light">
-
         <main
           className={`relative z-10 max-w-4xl w-full flex flex-col items-center text-center space-y-12 transition-opacity duration-700 ${
             showIntro ? "opacity-0" : "opacity-100"
@@ -60,10 +59,6 @@ export default function Home() {
         >
           {/* Header */}
           <div className="space-y-4">
-            <div className="inline-block px-3 py-1 rounded bg-brand-navy text-brand-light text-[10px] tracking-widest font-mono uppercase border border-brand-slate/20">
-              Under Construction
-            </div>
-
             <h1 className="font-serif text-4xl md:text-6xl font-light tracking-wide text-brand-light">
               FOURTH EDITION
             </h1>

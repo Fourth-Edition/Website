@@ -28,7 +28,7 @@ function useIntroAnimation(
     const sloganLetters = slogan.querySelectorAll("span");
 
     const tl = gsap.timeline({
-      onComplete: () => setTimeout(onComplete, 300),
+      onComplete: () => setTimeout(onComplete, 200),
     });
 
     // Company name – each letter flips in like a page turn
@@ -36,8 +36,8 @@ function useIntroAnimation(
       rotateX: 90,
       opacity: 0,
       transformOrigin: "50% 100%", // flip from the bottom edge
-      stagger: 0.08,
-      duration: 0.5,
+      stagger: 0.03,
+      duration: 0.2,
       ease: "power3.out",
     })
       // Slogan – same page flip, slightly faster stagger
@@ -47,11 +47,11 @@ function useIntroAnimation(
           rotateX: 90,
           opacity: 0,
           transformOrigin: "50% 100%",
-          stagger: 0.04,
-          duration: 0.4,
+          stagger: 0.02,
+          duration: 0.2,
           ease: "power3.out",
-        },
-        "+=0.2"
+        }
+        // "+=0.2"
       );
   }, [onComplete]);
 }
