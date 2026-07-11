@@ -52,8 +52,8 @@ export default function NavBar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-8 md:px-16 transition-all duration-300 ${
         scrolled
-          ? "py-3 bg-brand-black/80 backdrop-blur-md border-b border-brand-navy/60"
-          : "py-5 bg-transparent"
+          ? "py-5 bg-brand-black/80 backdrop-blur-md border-b border-brand-navy/60"
+          : "py-6 bg-transparent border-transparent"
       }`}
     >
       {/* Brand */}

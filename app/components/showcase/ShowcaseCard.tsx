@@ -8,6 +8,8 @@ import { useGSAP } from "@gsap/react";
 import { geistMono } from "../../fonts";
 import { useScramble } from "../../hooks/useScramble";
 
+import GlowUpBorder from "@/components/BorderGlow";
+
 gsap.registerPlugin(ScrollTrigger);
 
 interface ShowcaseCardProps {
@@ -27,7 +29,10 @@ interface ShowcaseCardProps {
  * Hovering highlights the card border and surfaces a short statement
  * next to an external-link icon, signalling that the card navigates away.
  */
-function useScrollReveal(triggerRef: React.RefObject<HTMLAnchorElement | null>, onEnter: () => void) {
+function useScrollReveal(
+  triggerRef: React.RefObject<HTMLAnchorElement | null>,
+  onEnter: () => void
+) {
   useGSAP(() => {
     if (!triggerRef.current) return;
 
@@ -54,32 +59,45 @@ export default function ShowcaseCard({
   useScrollReveal(containerRef, scramble);
 
   return (
-    <a
-      ref={containerRef}
-      href={href}
-      aria-label={ctaText}
-      title={ctaText}
-      className="group relative flex flex-col md:flex-row items-center gap-6 md:gap-10 w-full rounded-3xl
-      border border-transparent hover:border-brand-slate/40 transition-colors duration-300 p-6"
+    <GlowUpBorder
+      glowColor="232 55 55"
+      colors={["#0F044C", "#141E61", "#787A91", "#EEEEEE"]}
     >
-      <div className="shrink-0">{children}</div>
-
-      <div className="text-center md:text-left md:flex-1">
-        <p className={`${geistMono.className} text-brand-light text-sm tracking-widest`}>{text}</p>
-        <p className="text-brand-slate text-sm md:text-base leading-relaxed mt-3">{description}</p>
-      </div>
-
-      <div
-        className="absolute top-4 right-4 flex items-center gap-2 opacity-0 -translate-y-1 translate-x-1
-        group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300"
+      <a
+        ref={containerRef}
+        href={href}
+        aria-label={ctaText}
+        title={ctaText}
+        className="group relative flex flex-col md:flex-row items-center gap-6 md:gap-10 w-full rounded-3xl
+      border border-transparent hover:border-brand-slate/40 transition-colors duration-300 p-6"
       >
-        <span className={`${geistMono.className} text-brand-slate text-[10px] tracking-wide whitespace-nowrap`}>
-          {ctaText}
-        </span>
-        <span className="w-4 h-4 text-brand-slate shrink-0">
-          <ExternalLink className="w-full h-full" />
-        </span>
-      </div>
-    </a>
+        <div className="shrink-0">{children}</div>
+
+        <div className="text-center md:text-left md:flex-1">
+          <p
+            className={`${geistMono.className} text-brand-light text-sm tracking-widest`}
+          >
+            {text}
+          </p>
+          <p className="text-brand-slate text-sm md:text-base leading-relaxed mt-3">
+            {description}
+          </p>
+        </div>
+
+        <div
+          className="absolute top-4 right-4 flex items-center gap-2 opacity-0 -translate-y-1 translate-x-1
+        group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300"
+        >
+          <span
+            className={`${geistMono.className} text-brand-slate text-[10px] tracking-wide whitespace-nowrap`}
+          >
+            {ctaText}
+          </span>
+          <span className="w-4 h-4 text-brand-slate shrink-0">
+            <ExternalLink className="w-full h-full" />
+          </span>
+        </div>
+      </a>
+    </GlowUpBorder>
   );
 }

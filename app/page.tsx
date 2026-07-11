@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import IntroScreen from "./components/IntroScreen";
+import Hero from "./components/Hero";
 import MobileShowcase from "./components/mobile-showcase/MobileShowcase";
 import ShowcaseSection from "./components/showcase/ShowcaseSection";
 import ShowcaseCard from "./components/showcase/ShowcaseCard";
-import { geistMono } from "./fonts";
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
@@ -37,19 +37,7 @@ export default function Home() {
           showIntro ? "opacity-0" : "opacity-100"
         }`}
       >
-        {/* Hero */}
-        <div className="relative min-h-screen flex flex-col items-center justify-center px-6 py-24 w-full">
-          <div className="space-y-4 text-center">
-            <h1 className={`${geistMono.className} text-6xl`}>
-              FOURTH EDITION
-            </h1>
-
-            <p className="text-brand-slate text-sm md:text-base max-w-md mx-auto leading-relaxed font-light">
-              A software house building modern digital products. We are crafting
-              our new site.
-            </p>
-          </div>
-        </div>
+        <Hero play={!showIntro} />
 
         {/* What we build */}
         <ShowcaseSection>
