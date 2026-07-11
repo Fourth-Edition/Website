@@ -3,6 +3,11 @@ import "./globals.css";
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
 import { geistMono, ebGaramond } from "./fonts";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+import DotField from "@/components/DotField";
+
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Fourth Edition — Software House",
@@ -18,10 +23,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={` ${geistMono.variable}  ${ebGaramond.variable} h-screen antialiased`}
+      className={cn(
+        "h-screen",
+        "antialiased",
+        geistMono.variable,
+        ebGaramond.variable,
+        "font-sans",
+        geist.variable
+      )}
     >
       <body className={`min-h-screen flex flex-col`}>
         <NavBar />
+        <DotField glowColor="transparent" />
         <main className="flex-grow flex flex-col">{children}</main>
         <Footer />
       </body>
