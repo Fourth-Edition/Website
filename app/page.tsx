@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import IntroScreen from "./components/IntroScreen";
+import MobileShowcase from "./components/mobile-showcase/MobileShowcase";
 import { geistMono } from "./fonts";
-import Image from "next/image";
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
@@ -70,15 +70,8 @@ export default function Home() {
               our new site.
             </p>
           </div>
-          <div className="flex flex-row w-full">
-            <Image
-              src="/mobile.png"
-              alt="Fourth Edition"
-              width={1400}
-              height={300}
-              className="w-1/2"
-            />
-            <div className="bg-amber-50 w-1/2"> </div>
+          <div className="flex justify-center w-full pt-4">
+            <MobileShowcase />
           </div>
           {/* Offerings Grid */}
           {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl text-left pt-4">
@@ -99,7 +92,7 @@ export default function Home() {
 
           {/* Contact CTA */}
           <div className="pt-6 flex flex-col items-center space-y-4">
-            <p className="text-[11px] font-mono text-brand-slate tracking-wider">
+            <p className="text-[10px] font-mono text-brand-slate tracking-widest">
               HAVE A PROJECT IN MIND? GET IN TOUCH
             </p>
             <a
