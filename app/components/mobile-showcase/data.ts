@@ -15,7 +15,7 @@ export interface Product {
 
 // Sample catalog entry for the shopping-app mock screen.
 export const product: Product = {
-  name: "Canvas Low-Top Sneaker",
+  name: "Shoulder bag with flap",
   category: "Footwear",
   price: "$128",
   rating: 4.5,

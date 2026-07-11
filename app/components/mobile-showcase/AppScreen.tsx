@@ -23,7 +23,7 @@ export default function AppScreen() {
           >
             {product.category.toUpperCase()}
           </p>
-          <h2 className="text-shop-ink text-base font-medium mt-0.5">
+          <h2 className="text-shop-ink text-base text-start font-medium mt-0.5">
             {product.name}
           </h2>
           <RatingStars
