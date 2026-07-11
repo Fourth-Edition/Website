@@ -59,7 +59,12 @@ export default function NavBar() {
       {/* Brand */}
       <a
         href="/"
-        className={`${geistMono.className} text-lg text-brand-light tracking-wide`}
+        className={`${geistMono.className} relative text-lg text-brand-light tracking-wide
+        after:absolute after:bottom-0 after:left-0
+        after:h-px after:w-full after:origin-left after:scale-x-0
+        after:bg-[#A8483A]
+        after:transition-transform after:duration-300 after:ease-out
+        hover:after:scale-x-100`}
       >
         Fourth Edition
       </a>

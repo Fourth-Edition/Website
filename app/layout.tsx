@@ -34,7 +34,11 @@ export default function RootLayout({
     >
       <body className={`min-h-screen flex flex-col`}>
         <NavBar />
-        <DotField glowColor="transparent" />
+        <DotField
+          glowColor="transparent"
+          gradientFrom="rgba(140, 59, 46, 0.35)"
+          gradientTo="rgba(168, 72, 58, 0.25)"
+        />
         <main className="flex-grow flex flex-col">{children}</main>
         <Footer />
       </body>

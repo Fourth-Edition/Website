@@ -87,7 +87,7 @@ export default function Hero({ play }: HeroProps) {
         <a
           ref={ctaRef}
           href="mailto:hello@fourthedition.co"
-          className={`${geistMono.className} inline-block mt-10 px-6 py-3 rounded bg-brand-navy hover:bg-[#1c2a8c] text-brand-light text-xs tracking-widest transition-colors border border-brand-slate/20`}
+          className={`${geistMono.className} inline-block mt-10 px-6 py-3 rounded bg-brand-navy hover:bg-[#A8483A] text-brand-light text-xs tracking-widest transition-colors border border-brand-slate/20`}
         >
           START A PROJECT
         </a>

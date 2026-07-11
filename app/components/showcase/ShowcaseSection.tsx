@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import { geistMono } from "../../fonts";
-import GlowUpBorder from "@/components/BorderGlow";
 
 interface ShowcaseSectionProps {
   children: ReactNode;

@@ -8,8 +8,6 @@ import { useGSAP } from "@gsap/react";
 import { geistMono } from "../../fonts";
 import { useScramble } from "../../hooks/useScramble";
 
-import GlowUpBorder from "@/components/BorderGlow";
-
 gsap.registerPlugin(ScrollTrigger);
 
 interface ShowcaseCardProps {
@@ -59,45 +57,51 @@ export default function ShowcaseCard({
   useScrollReveal(containerRef, scramble);
 
   return (
-    <GlowUpBorder
-      glowColor="232 55 55"
-      colors={["#0F044C", "#141E61", "#787A91", "#EEEEEE"]}
-    >
-      <a
-        ref={containerRef}
-        href={href}
-        aria-label={ctaText}
-        title={ctaText}
-        className="group relative flex flex-col md:flex-row items-center gap-6 md:gap-10 w-full rounded-3xl
+    // <GlowUpBorder
+    //   glowColor="8 50 55"
+    //   colors={["#4A1D15", "#8C3B2E", "#8F7770", "#EDE6E3"]}
+    //   backgroundColor="#160A08"
+    // >
+    <a
+      ref={containerRef}
+      href={href}
+      aria-label={ctaText}
+      title={ctaText}
+      className="group relative flex flex-col md:flex-row items-center gap-6 md:gap-10 w-full rounded-3xl
       border border-transparent hover:border-brand-slate/40 transition-colors duration-300 p-6"
-      >
-        <div className="shrink-0">{children}</div>
+    >
+      <div className="shrink-0">{children}</div>
 
-        <div className="text-center md:text-left md:flex-1">
-          <p
-            className={`${geistMono.className} text-brand-light text-sm tracking-widest`}
-          >
-            {text}
-          </p>
-          <p className="text-brand-slate text-sm md:text-base leading-relaxed mt-3">
-            {description}
-          </p>
-        </div>
-
-        <div
-          className="absolute top-4 right-4 flex items-center gap-2 opacity-0 -translate-y-1 translate-x-1
-        group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300"
+      <div className="text-center md:text-left md:flex-1">
+        <p
+          className={`${geistMono.className} relative inline-block text-brand-light text-sm tracking-widest
+          after:absolute after:bottom-0 after:left-0
+          after:h-px after:w-full after:origin-left after:scale-x-0
+          after:bg-[#A8483A]
+          after:transition-transform after:duration-300 after:ease-out
+          group-hover:after:scale-x-100`}
         >
-          <span
-            className={`${geistMono.className} text-brand-slate text-[10px] tracking-wide whitespace-nowrap`}
-          >
-            {ctaText}
-          </span>
-          <span className="w-4 h-4 text-brand-slate shrink-0">
-            <ExternalLink className="w-full h-full" />
-          </span>
-        </div>
-      </a>
-    </GlowUpBorder>
+          {text}
+        </p>
+        <p className="text-brand-slate text-sm md:text-base leading-relaxed mt-3">
+          {description}
+        </p>
+      </div>
+
+      <div
+        className="absolute top-4 right-4 flex items-center gap-2 opacity-0 -translate-y-1 translate-x-1
+        group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300"
+      >
+        <span
+          className={`${geistMono.className} text-brand-slate text-[10px] tracking-wide whitespace-nowrap`}
+        >
+          {ctaText}
+        </span>
+        <span className="w-4 h-4 text-brand-slate shrink-0">
+          <ExternalLink className="w-full h-full" />
+        </span>
+      </div>
+    </a>
+    // </GlowUpBorder>
   );
 }
