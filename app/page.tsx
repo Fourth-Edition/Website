@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import IntroScreen from "./components/IntroScreen";
 import MobileShowcase from "./components/mobile-showcase/MobileShowcase";
+import ShowcaseSection from "./components/showcase/ShowcaseSection";
+import ShowcaseCard from "./components/showcase/ShowcaseCard";
 import { geistMono } from "./fonts";
 
 export default function Home() {
@@ -26,41 +28,18 @@ export default function Home() {
     return <div className="min-h-screen bg-brand-black" />;
   }
 
-  const services = [
-    {
-      name: "Websites & Web Apps",
-      desc: "Custom marketing platforms and rich application interfaces.",
-    },
-    {
-      name: "Mobile Applications",
-      desc: "Native and cross-platform experiences for iOS and Android.",
-    },
-    {
-      name: "Systems (CRM / ERP)",
-      desc: "Tailored databases and internal workflow automation.",
-    },
-    {
-      name: "Branding & Identity",
-      desc: "Visual guidelines, logos, and coherent corporate design.",
-    },
-    {
-      name: "Marketing & Strategy",
-      desc: "Search visibility, optimization, and conversion consulting.",
-    },
-  ];
-
   return (
     <>
       {showIntro && <IntroScreen onComplete={handleIntroComplete} />}
 
-      <div className="relative min-h-screen  flex flex-col items-center justify-center px-6 py-24  w-full">
-        <main
-          className={`relative z-10  w-full flex flex-col items-center text-center space-y-12 transition-opacity duration-700 ${
-            showIntro ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          {/* Header */}
-          <div className="space-y-4">
+      <div
+        className={`w-full transition-opacity duration-700 ${
+          showIntro ? "opacity-0" : "opacity-100"
+        }`}
+      >
+        {/* Hero */}
+        <div className="relative min-h-screen flex flex-col items-center justify-center px-6 py-24 w-full">
+          <div className="space-y-4 text-center">
             <h1 className={`${geistMono.className} text-6xl`}>
               FOURTH EDITION
             </h1>
@@ -70,39 +49,31 @@ export default function Home() {
               our new site.
             </p>
           </div>
-          <div className="flex justify-center w-full pt-4">
-            <MobileShowcase />
-          </div>
-          {/* Offerings Grid */}
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl text-left pt-4">
-            {services.map((svc, i) => (
-              <div
-                key={i}
-                className="p-5 rounded border border-brand-navy/60 bg-brand-navy/10 hover:border-brand-slate/40 transition-colors duration-300"
-              >
-                <h3 className="text-sm font-medium text-brand-light mb-1">
-                  {svc.name}
-                </h3>
-                <p className="text-brand-slate text-xs leading-relaxed">
-                  {svc.desc}
-                </p>
-              </div>
-            ))}
-          </div> */}
+        </div>
 
-          {/* Contact CTA */}
-          <div className="pt-6 flex flex-col items-center space-y-4">
-            <p className="text-[10px] font-mono text-brand-slate tracking-widest">
-              HAVE A PROJECT IN MIND? GET IN TOUCH
-            </p>
-            <a
-              href="mailto:hello@fourthedition.co"
-              className="px-6 py-3 rounded bg-brand-navy hover:bg-[#1c2a8c] text-brand-light text-xs font-mono tracking-widest transition-colors shadow-lg border border-brand-slate/20"
-            >
-              CONTACT_US
-            </a>
-          </div>
-        </main>
+        {/* What we build */}
+        <ShowcaseSection>
+          <ShowcaseCard
+            label="MOBILE APPLICATIONS"
+            description="Make your custom mobile app shine with a sleek, modern design. Our showcase highlights the intuitive interface and seamless user experience, ensuring your app stands out in the competitive market."
+            ctaText="Convert your idea into the real world"
+          >
+            <MobileShowcase />
+          </ShowcaseCard>
+        </ShowcaseSection>
+
+        {/* Contact CTA */}
+        <div className="pb-24 px-6 flex flex-col items-center text-center space-y-4">
+          <p className="text-[10px] font-mono text-brand-slate tracking-widest">
+            HAVE A PROJECT IN MIND? GET IN TOUCH
+          </p>
+          <a
+            href="mailto:hello@fourthedition.co"
+            className="px-6 py-3 rounded bg-brand-navy hover:bg-[#1c2a8c] text-brand-light text-xs font-mono tracking-widest transition-colors shadow-lg border border-brand-slate/20"
+          >
+            CONTACT_US
+          </a>
+        </div>
       </div>
     </>
   );

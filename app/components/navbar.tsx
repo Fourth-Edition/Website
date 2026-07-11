@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { geistMono } from "../fonts";
+import { useScramble } from "../hooks/useScramble";
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -10,48 +11,12 @@ const navLinks = [
   { label: "Contact Us", href: "#contact" },
 ] as const;
 
-const CHARS = "ABCDEFGHIJKLMN23456789";
-
 /**
  * On hover, each letter scrambles through random characters
  * before resolving back to the real letter — mechanical, deliberate.
  */
 function ScrambleLink({ label, href }: { label: string; href: string }) {
-  const [display, setDisplay] = useState(label);
-  const frameRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  function scramble() {
-    const iterations = label.length * 3;
-    let count = 0;
-
-    const tick = () => {
-      setDisplay(
-        label
-          .split("")
-          .map((char, i) => {
-            // Resolve letters left-to-right as iterations progress
-            if (char === " ") return " ";
-            if (i < Math.floor(count / 3)) return char;
-            return CHARS[Math.floor(Math.random() * CHARS.length)];
-          })
-          .join("")
-      );
-
-      count++;
-      if (count <= iterations) {
-        frameRef.current = setTimeout(tick, 40);
-      } else {
-        setDisplay(label);
-      }
-    };
-
-    tick();
-  }
-
-  function reset() {
-    if (frameRef.current) clearTimeout(frameRef.current);
-    setDisplay(label);
-  }
+  const { text, scramble, reset } = useScramble(label);
 
   return (
     <a
@@ -69,7 +34,7 @@ function ScrambleLink({ label, href }: { label: string; href: string }) {
         hover:after:scale-x-100
       "
     >
-      {display}
+      {text}
     </a>
   );
 }
