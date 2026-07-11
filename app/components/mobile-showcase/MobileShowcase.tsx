@@ -53,7 +53,10 @@ export default function MobileShowcase() {
         >
           MOBILE APPLICATIONS
         </p>
-        <p className="text-brand-light text-sm md:text-base leading-relaxed font-light">
+        <p
+          className=" text-xl tracking-widest   font-serif"
+          style={{ wordSpacing: "0.5em" }}
+        >
           Make your custom mobile app shine with a sleek, modern design. Our
           showcase highlights the intuitive interface and seamless user
           experience, ensuring your app stands out in the competitive market.
