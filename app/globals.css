@@ -15,12 +15,13 @@
   --font-space: var(--font-space-mono);
   --font-serif: var(--font-eb-garamond);
 
-  /* Brand palette — rust/red family, built off #8C3B2E */
-  --color-brand-black: #160A08; /* darkest bg, warm near-black */
-  --color-brand-deep: #4A1D15; /* deep oxblood */
-  --color-brand-navy: #8C3B2E; /* primary rust accent */
-  --color-brand-slate: #8F7770; /* muted warm taupe */
-  --color-brand-light: #EDE6E3; /* warm off-white */
+  /* Brand palette — blue family */
+  --color-brand-black: #13293d; /* darkest bg */
+  --color-brand-deep: #16324f; /* deep accent */
+  --color-brand-navy: #18435a; /* primary accent */
+  --color-brand-slate: #2a628f; /* muted blue */
+  --color-brand-light: #3e92cc; /* light blue */
+  --color-brand-ink: #0B1420; /* dark, readable text for use over light/transparent surfaces */
 
   /* Mobile showcase app palette — deliberately independent of the
      brand navy/deep tones, since the mock represents a separate

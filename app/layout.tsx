@@ -36,8 +36,8 @@ export default function RootLayout({
         <NavBar />
         <DotField
           glowColor="transparent"
-          gradientFrom="rgba(140, 59, 46, 0.35)"
-          gradientTo="rgba(168, 72, 58, 0.25)"
+          gradientFrom="rgba(24, 67, 90, 0.35)"
+          gradientTo="rgba(42, 98, 143, 0.25)"
         />
         <main className="flex-grow flex flex-col">{children}</main>
         <Footer />

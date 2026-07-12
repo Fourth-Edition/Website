@@ -52,14 +52,14 @@ export default function Home() {
 
         {/* Contact CTA */}
         <div className="pb-24 px-6 flex flex-col items-center text-center space-y-4">
-          <p className="text-[10px] font-mono text-brand-slate tracking-widest">
+          <p className="text-sm font-mono text-brand-slate tracking-widest">
             HAVE A PROJECT IN MIND? GET IN TOUCH
           </p>
           <a
             href="mailto:hello@fourthedition.co"
-            className="px-6 py-3 rounded bg-brand-navy hover:bg-[#A8483A] text-brand-light text-xs font-mono tracking-widest transition-colors shadow-lg border border-brand-slate/20"
+            className="px-6 py-3 rounded bg-brand-navy hover:bg-brand-stale text-white text-xs font-mono tracking-widest transition-colors shadow-lg border border-brand-slate/20"
           >
-            CONTACT_US
+            CONTACT US
           </a>
         </div>
       </div>
