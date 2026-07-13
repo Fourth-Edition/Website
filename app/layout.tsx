@@ -36,6 +36,8 @@ export default function RootLayout({
         <NavBar />
         <DotField
           glowColor="transparent"
+          color="#18435a"
+          dotRadius={2}
           gradientFrom="rgba(24, 67, 90, 0.35)"
           gradientTo="rgba(42, 98, 143, 0.25)"
         />
