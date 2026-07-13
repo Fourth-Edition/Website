@@ -11,7 +11,6 @@ interface HeroProps {
 }
 
 type HeroRefs = {
-  eyebrow: React.RefObject<HTMLParagraphElement | null>;
   headline: React.RefObject<HTMLHeadingElement | null>;
   subheadline: React.RefObject<HTMLParagraphElement | null>;
   cta: React.RefObject<HTMLAnchorElement | null>;
@@ -29,12 +28,7 @@ function useHeroEntrance(play: boolean, refs: HeroRefs) {
 
       gsap
         .timeline({ defaults: { ease: "power3.out" } })
-        .from(refs.eyebrow.current, { opacity: 0, y: 14, duration: 0.5 })
-        .from(
-          refs.headline.current,
-          { opacity: 0, y: 28, duration: 0.7 },
-          "-=0.3"
-        )
+        .from(refs.headline.current, { opacity: 0, y: 28, duration: 0.7 }, "-=0.3")
         .from(
           refs.subheadline.current,
           { opacity: 0, y: 16, duration: 0.5 },
@@ -47,13 +41,13 @@ function useHeroEntrance(play: boolean, refs: HeroRefs) {
 }
 
 export default function Hero({ play }: HeroProps) {
-  const eyebrowRef = useRef<HTMLParagraphElement>(null);
+  
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subheadlineRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLAnchorElement>(null);
 
   useHeroEntrance(play, {
-    eyebrow: eyebrowRef,
+  
     headline: headlineRef,
     subheadline: subheadlineRef,
     cta: ctaRef,
@@ -62,13 +56,6 @@ export default function Hero({ play }: HeroProps) {
   return (
     <div className="relative min-h-screen w-full  flex flex-col justify-center px-6 md:px-16 py-24">
       <div className="max-w-2xl">
-        <p
-          ref={eyebrowRef}
-          className={`${geistMono.className} text-brand-slate text-[10px] tracking-widest mb-6`}
-        >
-          NOW BOOKING — SUMMER 2026
-        </p>
-
         <h1
           ref={headlineRef}
           className={`${ebGaramond.className} text-brand-light text-4xl md:text-6xl lg:text-7xl leading-[1.1]`}

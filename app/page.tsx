@@ -57,7 +57,7 @@ export default function Home() {
           </p>
           <a
             href="mailto:hello@fourthedition.co"
-            className="px-6 py-3 rounded bg-brand-navy hover:bg-brand-stale text-white text-xs font-mono tracking-widest transition-colors shadow-lg border border-brand-slate/20"
+            className="px-6 py-3 rounded bg-brand-navy hover:bg-brand-light text-white text-xs font-mono tracking-widest transition-colors duration-300 shadow-lg border border-brand-slate/20 hover:border-brand-light"
           >
             CONTACT US
           </a>
