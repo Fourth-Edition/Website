@@ -4,6 +4,7 @@ We are a software house specializing in high-performance digital solutions and m
 
 ## Core Capabilities
 * **Websites & Web Apps:** Custom marketing sites, portals, and rich web applications.
+* **UI/UX** Modern UI designs paired with thoughtful, user-centered UX.
 * **Mobile Applications:** Native and cross-platform mobile apps for iOS and Android.
 * **Enterprise Systems:** CRM, ERP, and bespoke database management systems.
 * **Branding & Identity:** Visual systems, guidelines, and corporate identity packages.
