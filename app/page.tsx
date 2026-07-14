@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import IntroScreen from "./components/IntroScreen";
 import Hero from "./components/Hero";
 import MobileShowcase from "./components/mobile-showcase/MobileShowcase";
+import WebShowcase from "./components/web-showcase/WebShowcase";
 import ShowcaseSection from "./components/showcase/ShowcaseSection";
 import ShowcaseCard from "./components/showcase/ShowcaseCard";
 
@@ -47,6 +48,14 @@ export default function Home() {
             ctaText="Convert your idea into the real world"
           >
             <MobileShowcase />
+          </ShowcaseCard>
+
+          <ShowcaseCard
+            label="WEB APPLICATIONS"
+            description="From CRMs to internal dashboards, we build web apps that turn raw data into decisions — pipelines, reports, and the systems your team runs on every day."
+            ctaText="See how your data could work for you"
+          >
+            <WebShowcase />
           </ShowcaseCard>
         </ShowcaseSection>
 
