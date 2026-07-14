@@ -1,4 +1,5 @@
 import { HomeIcon, SearchIcon, BagIcon, ProfileIcon } from "./icons";
+import { shop } from "./theme";
 
 const navItems = [
   { label: "Home", Icon: HomeIcon, active: true },
@@ -9,12 +10,12 @@ const navItems = [
 
 export default function BottomNav() {
   return (
-    <nav className="flex items-center justify-around py-3 border-t border-shop-line bg-shop-bg">
+    <nav className={`flex items-center justify-around py-3 border-t ${shop.line} ${shop.bg}`}>
       {navItems.map(({ label, Icon, active }) => (
         <div key={label} className="relative">
           <div
             className={`flex items-center justify-center w-7 h-7 rounded-full ${
-              active ? "bg-shop-ink text-shop-bg" : "text-shop-muted"
+              active ? `${shop.inkBg} ${shop.onAccent}` : shop.muted
             }`}
             aria-label={label}
           >
@@ -23,7 +24,7 @@ export default function BottomNav() {
             </div>
           </div>
           {label === "Bag" && (
-            <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-shop-accent text-shop-bg text-[8px] flex items-center justify-center">
+            <span className={`absolute -top-0.5 -right-0.5 w-3.5 h-3.5 rounded-full ${shop.accentBg} ${shop.onAccent} text-[8px] flex items-center justify-center`}>
               2
             </span>
           )}
