@@ -71,11 +71,11 @@ export const projectTypes: string[] = [
 ];
 
 export const budgets: string[] = [
-  "Under $10k",
-  "$10k – $25k",
-  "$25k – $50k",
-  "$50k – $100k",
-  "$100k+",
+  "Under 50,000 EGP",
+  "50,000 – 100,000 EGP",
+  "100,000 – 250,000 EGP",
+  "250,000 – 500,000 EGP",
+  "500,000+ EGP",
   "Not sure yet",
 ];
 

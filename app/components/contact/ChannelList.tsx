@@ -1,15 +1,39 @@
+"use client";
+
 import { geistMono } from "../../fonts";
 import { type Channel, socialLinks } from "../../data/contact";
+import { useLanguage } from "../../context/LanguageContext";
+import { dictionary } from "../../data/translations";
 
-/** Direct communication channels and social networks. */
 export default function ChannelList({ channels }: { channels: Channel[] }) {
+  const { locale, isAr } = useLanguage();
+  const tContact = dictionary[locale].contact;
+
+  const translatedChannels = channels.map((c) => {
+    if (c.label === "Phone & WhatsApp") {
+      return {
+        ...c,
+        label: isAr ? "الهاتف والواتساب" : c.label,
+        note: isAr ? "راسلنا عبر واتساب أو اتصل بنا مباشرة خلال ساعات العمل." : c.note,
+      };
+    }
+    if (c.label === "Official Email" || c.label === "New projects") {
+      return {
+        ...c,
+        label: isAr ? "البريد الإلكتروني" : c.label,
+        note: isAr ? "للاستفسارات وطلبات التسعير. نرد خلال يوم عمل واحد." : c.note,
+      };
+    }
+    return c;
+  });
+
   return (
     <div className="flex flex-col gap-10">
       <ul className="flex flex-col gap-7">
-        {channels.map((channel) => (
+        {translatedChannels.map((channel) => (
           <li key={channel.label} className="flex flex-col gap-2">
             <p
-              className={`${geistMono.className} text-brand-navy text-sm font-semibold tracking-widest uppercase`}
+              className={`${isAr ? "font-bold text-xs" : geistMono.className} text-brand-navy text-xs font-semibold tracking-widest uppercase`}
             >
               {channel.label}
             </p>
@@ -17,7 +41,7 @@ export default function ChannelList({ channels }: { channels: Channel[] }) {
               href={channel.href}
               target={channel.isExternal ? "_blank" : undefined}
               rel={channel.isExternal ? "noopener noreferrer" : undefined}
-              className="font-sans text-brand-black text-xl font-medium relative inline-block w-fit
+              className="font-sans text-brand-black text-lg font-medium relative inline-block w-fit
               after:absolute after:bottom-0 after:left-0
               after:h-px after:w-full after:origin-left after:scale-x-0
               after:bg-brand-navy
@@ -39,9 +63,9 @@ export default function ChannelList({ channels }: { channels: Channel[] }) {
       {/* Social Media Links Section */}
       <div className="flex flex-col gap-3 pt-6 border-t border-brand-slate/25">
         <p
-          className={`${geistMono.className} text-brand-navy text-sm font-semibold tracking-widest uppercase`}
+          className={`${isAr ? "font-bold text-xs" : geistMono.className} text-brand-navy text-xs font-semibold tracking-widest uppercase`}
         >
-          CONNECT ON SOCIAL MEDIA
+          {tContact.socialTitle}
         </p>
         <div className="flex flex-col gap-2.5">
           {socialLinks.map((social) => (

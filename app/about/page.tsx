@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client";
+
 import PageShell from "../components/page/PageShell";
 import PageHeader from "../components/page/PageHeader";
 import CtaBlock from "../components/page/CtaBlock";
@@ -7,40 +8,39 @@ import ValueGrid from "../components/about/ValueGrid";
 import TimelineList from "../components/about/TimelineList";
 import TeamGrid from "../components/about/TeamGrid";
 import { ebGaramond, geistMono } from "../fonts";
-import { intro, stats, team, timeline, values } from "../data/about";
-
-export const metadata: Metadata = {
-  title: "About — Fourth Edition",
-  description:
-    "An architectural software atelier delivering high-performance digital products and scalable enterprise systems.",
-};
+import { stats, team, timeline, values } from "../data/about";
+import { useLanguage } from "../context/LanguageContext";
+import { dictionary } from "../data/translations";
 
 export default function AboutPage() {
+  const { locale, isAr } = useLanguage();
+  const tAbout = dictionary[locale].about;
+
   return (
     <PageShell>
       <PageHeader
-        eyebrow={intro.eyebrow}
-        headline={intro.headline}
-        lede={intro.lede}
+        eyebrow={tAbout.eyebrow}
+        headline={tAbout.headline}
+        lede={tAbout.lede}
       />
 
       <StatStrip stats={stats} />
 
       {/* Philosophy & Values */}
-      <section className="flex flex-col gap-8">
+      <section className="flex flex-col gap-6 md:gap-8">
         <div className="flex flex-col gap-3 max-w-3xl">
           <p
-            className={`${geistMono.className} text-brand-navy text-sm font-semibold tracking-widest uppercase`}
+            className={`${isAr ? "font-bold text-xs" : geistMono.className} text-brand-navy text-xs md:text-sm font-semibold tracking-widest uppercase`}
           >
-            OUR BRAND PHILOSOPHY
+            {tAbout.philosophyTitle}
           </p>
           <h2
-            className={`${ebGaramond.className} text-brand-black text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
+            className={`${isAr ? "font-bold font-sans-arabic" : ebGaramond.className} text-brand-black text-3xl sm:text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
           >
-            The &quot;4th Edition&quot; Standard
+            {tAbout.philosophyHeadline}
           </h2>
-          <p className="font-sans text-brand-ink/80 text-lg leading-relaxed text-pretty">
-            We skip traditional trial-and-error phases to deliver mature, production-grade solutions from day one.
+          <p className="font-sans text-brand-ink/80 text-base leading-relaxed text-pretty">
+            {tAbout.philosophyLede}
           </p>
         </div>
 
@@ -48,17 +48,17 @@ export default function AboutPage() {
       </section>
 
       {/* History & Timeline */}
-      <section className="flex flex-col gap-8">
+      <section className="flex flex-col gap-6 md:gap-8">
         <div className="flex flex-col gap-3 max-w-3xl">
           <p
-            className={`${geistMono.className} text-brand-navy text-sm font-semibold tracking-widest uppercase`}
+            className={`${isAr ? "font-bold text-xs" : geistMono.className} text-brand-navy text-xs md:text-sm font-semibold tracking-widest uppercase`}
           >
-            COMPANY JOURNEY & MILESTONES
+            {tAbout.journeyTitle}
           </p>
           <h2
-            className={`${ebGaramond.className} text-brand-black text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
+            className={`${isAr ? "font-bold font-sans-arabic" : ebGaramond.className} text-brand-black text-3xl sm:text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
           >
-            From January 2026 to Market Leadership
+            {tAbout.journeyHeadline}
           </h2>
         </div>
 
@@ -66,27 +66,30 @@ export default function AboutPage() {
       </section>
 
       {/* Team Nucleus */}
-      <section className="flex flex-col gap-8">
+      <section className="flex flex-col gap-6 md:gap-8">
         <div className="flex flex-col gap-3 max-w-3xl">
           <p
-            className={`${geistMono.className} text-brand-navy text-sm font-semibold tracking-widest uppercase`}
+            className={`${isAr ? "font-bold text-xs" : geistMono.className} text-brand-navy text-xs md:text-sm font-semibold tracking-widest uppercase`}
           >
-            ENGINEERING NUCLEUS
+            {tAbout.nucleusTitle}
           </p>
           <h2
-            className={`${ebGaramond.className} text-brand-black text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
+            className={`${isAr ? "font-bold font-sans-arabic" : ebGaramond.className} text-brand-black text-3xl sm:text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
           >
-            Compact team, extreme execution
+            {tAbout.nucleusHeadline}
           </h2>
-          <p className="font-sans text-brand-ink/80 text-lg leading-relaxed text-pretty">
-            We operate as an agile technical nucleus where senior architectural engineers own your project end-to-end.
+          <p className="font-sans text-brand-ink/80 text-base leading-relaxed text-pretty">
+            {tAbout.nucleusLede}
           </p>
         </div>
 
         <TeamGrid members={team} />
       </section>
 
-      <CtaBlock label="READY TO BUILD WITH FOURTH EDITION?" action="GET IN TOUCH" />
+      <CtaBlock
+        label={isAr ? "مستعد للبناء مع فورث إديشن؟" : "READY TO BUILD WITH FOURTH EDITION?"}
+        action={isAr ? "تواصل معنا" : "GET IN TOUCH"}
+      />
     </PageShell>
   );
 }

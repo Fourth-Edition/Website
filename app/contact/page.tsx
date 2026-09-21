@@ -1,31 +1,31 @@
-import type { Metadata } from "next";
+"use client";
+
 import PageShell from "../components/page/PageShell";
 import PageHeader from "../components/page/PageHeader";
 import ContactForm from "../components/contact/ContactForm";
 import ChannelList from "../components/contact/ChannelList";
 import { geistMono } from "../fonts";
 import { channels, studio } from "../data/contact";
-
-export const metadata: Metadata = {
-  title: "Contact — Fourth Edition",
-  description:
-    "Start a project, ask a scoping question, or get support on an existing build.",
-};
+import { useLanguage } from "../context/LanguageContext";
+import { dictionary } from "../data/translations";
 
 export default function ContactPage() {
+  const { locale, isAr } = useLanguage();
+  const tContact = dictionary[locale].contact;
+
   return (
     <PageShell>
       <PageHeader
-        eyebrow="CONTACT US"
-        headline="Tell us what you're building."
-        lede="A paragraph is enough to start. If it turns out we're the wrong studio for it, we'll say so and point you somewhere better."
+        eyebrow={tContact.eyebrow}
+        headline={tContact.headline}
+        lede={tContact.lede}
       />
 
       <section className="flex flex-col gap-8">
         <p
-          className={`${geistMono.className} text-brand-navy text-lg font-semibold tracking-widest`}
+          className={`${isAr ? "font-bold text-sm" : geistMono.className} text-brand-navy text-sm font-semibold tracking-widest uppercase`}
         >
-          ENQUIRY
+          {tContact.enquiryTitle}
         </p>
 
         <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr] items-start">
@@ -36,17 +36,17 @@ export default function ContactPage() {
 
             <dl className="flex flex-col gap-4 border-t border-brand-slate/25 pt-7">
               {[
-                { label: "LOCATION", value: studio.location },
-                { label: "HOURS", value: studio.hours },
-                { label: "RESPONSE TIME", value: studio.responseTime },
+                { label: tContact.locationLabel, value: isAr ? "شركة تعمل عن بُعد بالكامل" : studio.location },
+                { label: tContact.hoursLabel, value: isAr ? "الأحد – الخميس، من 9 ص حتى 6 م" : studio.hours },
+                { label: tContact.responseLabel, value: isAr ? "خلال ساعات قليلة" : studio.responseTime },
               ].map((item) => (
                 <div key={item.label} className="flex flex-col gap-1">
                   <dt
-                    className={`${geistMono.className} text-brand-navy text-base font-semibold tracking-widest`}
+                    className={`${isAr ? "font-bold text-xs" : geistMono.className} text-brand-navy text-xs font-semibold tracking-widest uppercase`}
                   >
                     {item.label}
                   </dt>
-                  <dd className="font-sans text-brand-ink/80 text-base">
+                  <dd className="font-sans text-brand-ink/80 text-base font-medium">
                     {item.value}
                   </dd>
                 </div>

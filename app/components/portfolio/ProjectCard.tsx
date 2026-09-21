@@ -1,9 +1,19 @@
+"use client";
+
 import Link from "next/link";
 import { geistMono } from "../../fonts";
 import type { Project } from "../../data/portfolio";
+import { useLanguage } from "../../context/LanguageContext";
 
 /** Card linking through to /portfolio/[slug]. */
 export default function ProjectCard({ project }: { project: Project }) {
+  const { isAr } = useLanguage();
+
+  const displayTitle = isAr && project.titleAr ? project.titleAr : project.title;
+  const displayClient = isAr && project.clientAr ? project.clientAr : project.client;
+  const displaySummary = isAr && project.summaryAr ? project.summaryAr : project.summary;
+  const displayCategory = isAr && project.categoryAr ? project.categoryAr : project.category;
+
   return (
     <Link
       href={`/portfolio/${project.slug}`}
@@ -14,23 +24,23 @@ export default function ProjectCard({ project }: { project: Project }) {
       <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-950 border-b border-brand-slate/20">
         <img
           src={project.coverImage}
-          alt={project.title}
+          alt={displayTitle}
           className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105 opacity-90 group-hover:opacity-100"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
         
         {/* Category Pill Overlay */}
-        <div className="absolute top-4 left-4 z-10">
+        <div className={`absolute top-4 ${isAr ? "right-4" : "left-4"} z-10`}>
           <span
-            className={`${geistMono.className} text-xs font-semibold px-3 py-1 rounded-full bg-slate-900/90 text-slate-100 border border-slate-700/50 backdrop-blur-md shadow-sm`}
+            className={`${isAr ? "font-bold text-xs" : geistMono.className} text-xs font-semibold px-3 py-1 rounded-full bg-slate-900/90 text-slate-100 border border-slate-700/50 backdrop-blur-md shadow-sm`}
           >
-            {project.category.toUpperCase()}
+            {displayCategory.toUpperCase()}
           </span>
         </div>
 
         {/* Year Pill Overlay */}
-        <div className="absolute top-4 right-4 z-10">
+        <div className={`absolute top-4 ${isAr ? "left-4" : "right-4"} z-10`}>
           <span
             className={`${geistMono.className} text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-900/70 text-slate-300 backdrop-blur-md`}
           >
@@ -39,27 +49,27 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
       </div>
 
-      <div className="flex flex-col flex-1 p-7 gap-5">
+      <div className="flex flex-col flex-1 p-5 sm:p-7 gap-4 md:gap-5">
         <div className="flex flex-col gap-1.5">
           <p
-            className={`${geistMono.className} text-brand-navy text-xs font-semibold tracking-widest uppercase`}
+            className={`${isAr ? "font-bold text-xs" : geistMono.className} text-brand-navy text-xs font-semibold tracking-widest uppercase`}
           >
-            {project.client}
+            {displayClient}
           </p>
           <h3
-            className="font-sans text-brand-black text-2xl font-semibold tracking-tight relative inline-block w-fit
+            className={`${isAr ? "font-bold text-xl" : "font-sans text-2xl"} text-brand-black font-semibold tracking-tight relative inline-block w-fit
             after:absolute after:bottom-0 after:left-0
             after:h-px after:w-full after:origin-left after:scale-x-0
             after:bg-brand-navy
             after:transition-transform after:duration-300 after:ease-out
-            group-hover:after:scale-x-100"
+            group-hover:after:scale-x-100`}
           >
-            {project.title}
+            {displayTitle}
           </h3>
         </div>
 
         <p className="font-sans text-brand-ink/80 text-base leading-relaxed line-clamp-3">
-          {project.summary}
+          {displaySummary}
         </p>
 
         {/* Stack Tags */}
@@ -81,15 +91,15 @@ export default function ProjectCard({ project }: { project: Project }) {
           )}
         </div>
 
-        <dl className="flex flex-wrap gap-x-6 gap-y-2 mt-auto pt-4 border-t border-brand-slate/20">
+        <dl className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-3 mt-auto pt-4 border-t border-brand-slate/20">
           {project.metrics.map((metric) => (
             <div key={metric.label} className="flex flex-col gap-0.5">
               <dt
-                className={`${geistMono.className} text-brand-navy/70 text-[10px] font-semibold tracking-wider uppercase`}
+                className={`${isAr ? "font-bold text-[11px]" : geistMono.className} text-brand-navy/70 text-[10px] font-semibold tracking-wider uppercase truncate`}
               >
-                {metric.label}
+                {isAr && metric.labelAr ? metric.labelAr : metric.label}
               </dt>
-              <dd className="font-sans text-brand-black text-base font-semibold">
+              <dd className="font-sans text-brand-black text-sm sm:text-base font-semibold">
                 {metric.value}
               </dd>
             </div>

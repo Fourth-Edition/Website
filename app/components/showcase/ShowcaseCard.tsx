@@ -67,8 +67,8 @@ export default function ShowcaseCard({
       href={href}
       aria-label={ctaText}
       title={ctaText}
-      className="group relative flex flex-col md:flex-row items-center gap-6 md:gap-10 w-full rounded-3xl
-      border border-transparent hover:border-brand-slate/40 transition-colors duration-300 p-6"
+      className="group relative flex flex-col md:flex-row items-center gap-4 md:gap-10 w-full rounded-3xl
+      border border-transparent hover:border-brand-slate/40 transition-colors duration-300 p-4 md:p-6"
     >
       <div className="shrink-0">{children}</div>
 

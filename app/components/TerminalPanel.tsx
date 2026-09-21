@@ -2,14 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { geistMono } from "../fonts";
+import { useLanguage } from "../context/LanguageContext";
 
 interface TerminalPanelProps {
-  /** Gates the loop so it doesn't spin while hidden behind the intro overlay. */
   play: boolean;
 }
 
-// Mirrors SERVICES.md's Core Capabilities list.
-const BUILD_STEPS = [
+const EN_BUILD_STEPS = [
   "web app",
   "ui/ux",
   "mobile app",
@@ -18,13 +17,21 @@ const BUILD_STEPS = [
   "marketing",
 ];
 
+const AR_BUILD_STEPS = [
+  "مواقع وتطبيقات الويب",
+  "تصميم الواجهات وتجربة المستخدم",
+  "تطبيقات الجوال",
+  "أنظمة المؤسسات والشركات",
+  "الهوية البصرية والعلامة التجارية",
+  "التسويق الرقمي والنمو",
+];
+
 const SPINNER_FRAMES = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
 
 const STEP_INTERVAL_MS = 900;
 const SPINNER_INTERVAL_MS = 80;
 
-/** Advances through the steps once, then stops on the last one. */
-function useBuildLoop(play: boolean) {
+function useBuildLoop(play: boolean, stepsLength: number) {
   const [step, setStep] = useState(0);
   const [done, setDone] = useState(false);
 
@@ -33,7 +40,7 @@ function useBuildLoop(play: boolean) {
     const id = setInterval(() => {
       setStep((s) => {
         const next = s + 1;
-        if (next >= BUILD_STEPS.length) {
+        if (next >= stepsLength) {
           setDone(true);
           return s;
         }
@@ -41,7 +48,7 @@ function useBuildLoop(play: boolean) {
       });
     }, STEP_INTERVAL_MS);
     return () => clearInterval(id);
-  }, [play, done]);
+  }, [play, done, stepsLength]);
 
   return { step, done };
 }
@@ -62,23 +69,28 @@ function useSpinnerFrame(active: boolean) {
 }
 
 export default function TerminalPanel({ play }: TerminalPanelProps) {
-  const { step: activeStep, done } = useBuildLoop(play);
+  const { isAr } = useLanguage();
+  const buildSteps = isAr ? AR_BUILD_STEPS : EN_BUILD_STEPS;
+  
+  const { step: activeStep, done } = useBuildLoop(play, buildSteps.length);
   const spinnerFrame = useSpinnerFrame(play && !done);
 
   return (
-    <div className="rounded-lg border border-brand-slate/30 bg-brand-black overflow-hidden">
-      <div className="flex items-center gap-1.5 px-4 py-3 border-b border-brand-slate/30">
+    <div className="rounded-lg border border-brand-slate/30 bg-brand-black overflow-hidden shadow-2xl">
+      <div className="flex items-center gap-1.5 px-4 py-3 border-b border-brand-slate/30 bg-slate-900/50">
         <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
         <span className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
         <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
       </div>
 
       <div
-        className={`${geistMono.className} p-6 text-xs md:text-sm space-y-3`}
+        className={`${isAr ? "font-bold text-xs font-sans-arabic" : geistMono.className} p-6 text-xs md:text-sm space-y-3`}
       >
-        <p className="text-brand-light">$ fourth edition build</p>
+        <p className="text-brand-light font-mono">
+          $ fourth edition build {isAr ? "--lang=ar" : ""}
+        </p>
 
-        {BUILD_STEPS.map((step, i) => {
+        {buildSteps.map((step, i) => {
           const isActive = i === activeStep && !done;
           const isPast = i < activeStep || (i === activeStep && done);
 
@@ -89,7 +101,7 @@ export default function TerminalPanel({ play }: TerminalPanelProps) {
               </span>
               <span
                 className={
-                  isPast || isActive ? "text-white" : "text-brand-slate/25"
+                  isPast || isActive ? "text-white font-medium" : "text-brand-slate/35"
                 }
               >
                 &gt; {step}

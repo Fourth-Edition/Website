@@ -34,7 +34,7 @@ export const services: Service[] = [
       "Analytics & performance budget",
     ],
     timeline: "6–12 weeks",
-    startingAt: "$12,000",
+    startingAt: "50,000 EGP",
   },
   {
     slug: "ui-ux",
@@ -49,7 +49,7 @@ export const services: Service[] = [
       "Handoff documentation",
     ],
     timeline: "3–6 weeks",
-    startingAt: "$6,500",
+    startingAt: "25,000 EGP",
   },
   {
     slug: "mobile-applications",
@@ -64,7 +64,7 @@ export const services: Service[] = [
       "App Store & Play submission",
     ],
     timeline: "10–16 weeks",
-    startingAt: "$24,000",
+    startingAt: "100,000 EGP",
   },
   {
     slug: "enterprise-systems",
@@ -79,7 +79,7 @@ export const services: Service[] = [
       "Team training & rollout",
     ],
     timeline: "12–24 weeks",
-    startingAt: "$38,000",
+    startingAt: "150,000 EGP",
   },
   {
     slug: "branding-identity",
@@ -94,7 +94,7 @@ export const services: Service[] = [
       "Launch asset kit",
     ],
     timeline: "4–8 weeks",
-    startingAt: "$8,000",
+    startingAt: "35,000 EGP",
   },
   {
     slug: "marketing-services",
@@ -109,7 +109,7 @@ export const services: Service[] = [
       "Monthly reporting",
     ],
     timeline: "Ongoing",
-    startingAt: "$2,400 / mo",
+    startingAt: "15,000 EGP / mo",
   },
 ];
 

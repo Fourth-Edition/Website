@@ -2,19 +2,54 @@
 
 import { useState } from "react";
 import { geistMono } from "../../fonts";
-import { budgets, projectTypes, timelines } from "../../data/contact";
+import { useLanguage } from "../../context/LanguageContext";
+import { dictionary } from "../../data/translations";
 
 const fieldClass = `w-full rounded border border-brand-slate/30 bg-white/70 px-4 py-3.5
-  font-sans text-lg text-brand-black placeholder:text-brand-slate/70
+  font-sans text-base text-brand-black placeholder:text-brand-slate/70
   focus:border-brand-navy focus:outline-none transition-colors duration-200`;
 
-const labelClass =
-  "text-brand-navy text-base font-semibold tracking-widest";
+/** Label text with optional/required badge */
+function FieldLabel({
+  text,
+  required,
+  optional,
+  optionalText,
+  isAr,
+}: {
+  text: string;
+  required?: boolean;
+  optional?: boolean;
+  optionalText: string;
+  isAr: boolean;
+}) {
+  return (
+    <span
+      className={`${isAr ? "font-bold" : geistMono.className} flex items-center gap-2 text-brand-navy text-xs font-semibold tracking-wider uppercase`}
+    >
+      {text}
+      {required && (
+        <span className="text-brand-navy text-[10px] font-bold">*</span>
+      )}
+      {optional && (
+        <span
+          className={`${isAr ? "font-bold text-[10px]" : geistMono.className} text-brand-slate/60 text-[9px] tracking-widest normal-case border border-brand-slate/25 rounded px-1.5 py-0.5`}
+        >
+          {optionalText}
+        </span>
+      )}
+    </span>
+  );
+}
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const { locale, isAr } = useLanguage();
+  const tContact = dictionary[locale].contact;
+  const optText = tContact.optionalLabel;
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -23,13 +58,14 @@ export default function ContactForm() {
 
     const formData = new FormData(event.currentTarget);
 
-    // FormSubmit fields
-    formData.append("_subject", "New Inquiry — Fourth Edition Website");
+    formData.append("_subject", isAr ? "طلب استشارة جديد — موقع فورث إديشن" : "New Inquiry — Fourth Edition Website");
     formData.append("_captcha", "false");
     formData.append("_template", "table");
     formData.append(
       "_autoresponse",
-      "Thank you for contacting Fourth Edition. We have received your inquiry and will get back to you within one working day."
+      isAr
+        ? "شكراً لتواصلك مع فورث إديشن. لقد استلمنا رسالتك وسنقوم بالرد عليك خلال يوم عمل واحد."
+        : "Thank you for contacting Fourth Edition. We have received your inquiry and will get back to you within one working day."
     );
 
     try {
@@ -51,12 +87,13 @@ export default function ContactForm() {
       } else {
         setErrorMsg(
           result.message ||
-            "Failed to submit. Please email 4th.edition.org@gmail.com directly."
+            (isAr
+              ? "تعذر إرسال الطلب. يمكنك مراسلتنا مباشرة عبر 4th.edition.org@gmail.com"
+              : "Failed to submit. Please email 4th.edition.org@gmail.com directly.")
         );
       }
     } catch (err) {
       console.error("FormSubmit error:", err);
-      // Smooth fallback to confirmation screen
       setSubmitted(true);
     } finally {
       setIsSubmitting(false);
@@ -69,24 +106,20 @@ export default function ContactForm() {
         <div className="flex items-center gap-3">
           <span className="w-3.5 h-3.5 rounded-full bg-emerald-500 animate-pulse" />
           <p
-            className={`${geistMono.className} text-emerald-800 text-lg font-semibold tracking-widest`}
+            className={`${isAr ? "font-bold font-sans-arabic" : geistMono.className} text-emerald-800 text-lg tracking-widest`}
           >
-            INQUIRY DELIVERED
+            {tContact.deliveredTitle}
           </p>
         </div>
         <p className="font-sans text-brand-ink/90 text-lg leading-relaxed">
-          Thank you for reaching out! Your message has been routed directly to{" "}
-          <strong className="text-brand-black underline decoration-emerald-400 decoration-2">
-            4th.edition.org@gmail.com
-          </strong>
-          . Our team will review your scope and get back to you within one working day.
+          {tContact.deliveredMsg}
         </p>
         <button
           type="button"
           onClick={() => setSubmitted(false)}
-          className={`${geistMono.className} self-start px-4 py-2 rounded border border-brand-slate/30 text-brand-navy hover:text-brand-black text-xs tracking-widest transition-colors duration-200`}
+          className={`${isAr ? "font-bold text-xs" : geistMono.className} self-start px-4 py-2 rounded border border-brand-slate/30 text-brand-navy hover:text-brand-black tracking-widest transition-colors duration-200`}
         >
-          ← SUBMIT ANOTHER ENQUIRY
+          {tContact.sendAnother}
         </button>
       </div>
     );
@@ -100,20 +133,21 @@ export default function ContactForm() {
       {/* Honeypot Spam Protection */}
       <input type="text" name="_honey" style={{ display: "none" }} />
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <label className={`${geistMono.className} flex flex-col gap-2`}>
-          <span className={labelClass}>NAME *</span>
+      {/* ── Row 1: Name · Email ── */}
+      <div className="grid gap-5 md:grid-cols-2">
+        <label className={`${isAr ? "font-bold" : geistMono.className} flex flex-col gap-2`}>
+          <FieldLabel text={tContact.nameLabel} required isAr={isAr} optionalText={optText} />
           <input
             required
             name="name"
             type="text"
-            placeholder="Jane Doe"
+            placeholder={isAr ? "محمد أحمد" : "Jane Doe"}
             className={fieldClass}
           />
         </label>
 
-        <label className={`${geistMono.className} flex flex-col gap-2`}>
-          <span className={labelClass}>EMAIL *</span>
+        <label className={`${isAr ? "font-bold" : geistMono.className} flex flex-col gap-2`}>
+          <FieldLabel text={tContact.emailLabel} required isAr={isAr} optionalText={optText} />
           <input
             required
             name="email"
@@ -122,24 +156,42 @@ export default function ContactForm() {
             className={fieldClass}
           />
         </label>
+      </div>
 
-        <label className={`${geistMono.className} flex flex-col gap-2`}>
-          <span className={labelClass}>COMPANY</span>
+      {/* ── Row 2: Phone · Company ── */}
+      <div className="grid gap-5 md:grid-cols-2">
+        <label className={`${isAr ? "font-bold" : geistMono.className} flex flex-col gap-2`}>
+          <FieldLabel text={tContact.phoneLabel} required isAr={isAr} optionalText={optText} />
           <input
-            name="company"
-            type="text"
-            placeholder="Company name"
+            required
+            name="phone"
+            type="tel"
+            placeholder={isAr ? "+20 10 XXXXXXXX" : "+1 (555) 000-0000"}
             className={fieldClass}
+            dir="ltr"
           />
         </label>
 
-        <label className={`${geistMono.className} flex flex-col gap-2`}>
-          <span className={labelClass}>PROJECT TYPE</span>
+        <label className={`${isAr ? "font-bold" : geistMono.className} flex flex-col gap-2`}>
+          <FieldLabel text={tContact.companyLabel} optional isAr={isAr} optionalText={optText} />
+          <input
+            name="company"
+            type="text"
+            placeholder={isAr ? "اسم الشركة أو المؤسسة" : "Company name"}
+            className={fieldClass}
+          />
+        </label>
+      </div>
+
+      {/* ── Row 3: Project Type · Budget · Timeline ── */}
+      <div className="grid gap-5 sm:grid-cols-3">
+        <label className={`${isAr ? "font-bold" : geistMono.className} flex flex-col gap-2`}>
+          <FieldLabel text={tContact.projectTypeLabel} optional isAr={isAr} optionalText={optText} />
           <select name="projectType" defaultValue="" className={fieldClass}>
             <option value="" disabled>
-              Select one
+              {isAr ? "اختر نوع المشروع" : "Select one"}
             </option>
-            {projectTypes.map((type) => (
+            {tContact.projectTypes.map((type) => (
               <option key={type} value={type}>
                 {type}
               </option>
@@ -147,13 +199,13 @@ export default function ContactForm() {
           </select>
         </label>
 
-        <label className={`${geistMono.className} flex flex-col gap-2`}>
-          <span className={labelClass}>BUDGET</span>
+        <label className={`${isAr ? "font-bold" : geistMono.className} flex flex-col gap-2`}>
+          <FieldLabel text={tContact.budgetLabel} optional isAr={isAr} optionalText={optText} />
           <select name="budget" defaultValue="" className={fieldClass}>
             <option value="" disabled>
-              Select a range
+              {isAr ? "اختر النطاق" : "Select a range"}
             </option>
-            {budgets.map((budget) => (
+            {tContact.budgets.map((budget) => (
               <option key={budget} value={budget}>
                 {budget}
               </option>
@@ -161,13 +213,13 @@ export default function ContactForm() {
           </select>
         </label>
 
-        <label className={`${geistMono.className} flex flex-col gap-2`}>
-          <span className={labelClass}>TIMELINE</span>
+        <label className={`${isAr ? "font-bold" : geistMono.className} flex flex-col gap-2`}>
+          <FieldLabel text={tContact.timelineLabel} optional isAr={isAr} optionalText={optText} />
           <select name="timeline" defaultValue="" className={fieldClass}>
             <option value="" disabled>
-              Select a timeline
+              {isAr ? "اختر المدى الزمني" : "Select a timeline"}
             </option>
-            {timelines.map((timeline) => (
+            {tContact.timelines.map((timeline) => (
               <option key={timeline} value={timeline}>
                 {timeline}
               </option>
@@ -176,16 +228,28 @@ export default function ContactForm() {
         </label>
       </div>
 
-      <label className={`${geistMono.className} flex flex-col gap-2`}>
-        <span className={labelClass}>WHAT ARE YOU BUILDING? *</span>
+      {/* ── Message ── */}
+      <label className={`${isAr ? "font-bold" : geistMono.className} flex flex-col gap-2`}>
+        <FieldLabel text={tContact.messageLabel} required isAr={isAr} optionalText={optText} />
         <textarea
           required
           name="message"
           rows={6}
-          placeholder="A paragraph is plenty. What exists today, and what should exist instead?"
+          placeholder={
+            isAr
+              ? "فقرة واحدة تكفي. ما الذي تريد بناءه، وما النتيجة التي تتوقعها؟"
+              : "A paragraph is plenty. What exists today, and what should exist instead?"
+          }
           className={`${fieldClass} resize-none`}
         />
       </label>
+
+      {/* ── Legend ── */}
+      <p
+        className={`${isAr ? "font-bold text-[10px]" : geistMono.className} text-brand-slate/60 text-[10px] tracking-widest`}
+      >
+        {isAr ? "* الحقول المطلوبة" : "* REQUIRED FIELDS"}
+      </p>
 
       {errorMsg && (
         <p className="text-red-600 text-xs font-mono bg-red-50 p-3 rounded border border-red-200">
@@ -193,22 +257,22 @@ export default function ContactForm() {
         </p>
       )}
 
-      <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2 border-t border-brand-slate/15">
         <p className={`${geistMono.className} text-brand-slate text-xs font-semibold tracking-wider`}>
-          POWERED BY FORMSUBMIT.CO · SENT TO 4TH.EDITION.ORG@GMAIL.COM
+          4TH.EDITION.ORG@GMAIL.COM
         </p>
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`${geistMono.className} px-8 py-4 rounded bg-brand-black hover:bg-brand-navy disabled:opacity-50 text-white text-base tracking-widest transition-colors duration-300 border border-brand-black hover:border-brand-navy flex items-center gap-2`}
+          className={`${isAr ? "font-bold text-sm font-sans-arabic" : geistMono.className} w-full sm:w-auto px-8 py-4 rounded bg-brand-black hover:bg-brand-navy disabled:opacity-50 text-white tracking-widest transition-colors duration-300 border border-brand-black hover:border-brand-navy flex items-center justify-center gap-2`}
         >
           {isSubmitting ? (
             <>
               <span className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-              SENDING...
+              {tContact.sendingBtn}
             </>
           ) : (
-            "SEND ENQUIRY"
+            tContact.sendBtn
           )}
         </button>
       </div>

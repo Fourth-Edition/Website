@@ -1,73 +1,58 @@
-import type { Metadata } from "next";
+"use client";
+
 import PageShell from "../components/page/PageShell";
 import PageHeader from "../components/page/PageHeader";
 import CtaBlock from "../components/page/CtaBlock";
 import ServiceCard from "../components/services/ServiceCard";
 import ProcessTimeline from "../components/services/ProcessTimeline";
 import { ebGaramond, geistMono } from "../fonts";
-import { process, services } from "../data/services";
-
-export const metadata: Metadata = {
-  title: "Services — Fourth Edition",
-  description:
-    "Websites and web apps, mobile applications, enterprise systems, branding, and marketing services.",
-};
+import { process } from "../data/services";
+import { useLanguage } from "../context/LanguageContext";
+import { dictionary } from "../data/translations";
 
 export default function ServicesPage() {
+  const { locale, isAr } = useLanguage();
+  const tServices = dictionary[locale].services;
+
   return (
     <PageShell>
       <PageHeader
-        eyebrow="SERVICES"
-        headline="What we build, and how it ships."
-        lede="Six practices, one team. Most projects pull from two or three of them — the scope conversation is where we work out which."
+        eyebrow={tServices.eyebrow}
+        headline={tServices.headline}
+        lede={tServices.lede}
       />
 
-      <section className="flex flex-col gap-8">
-        <div className="flex flex-col gap-3 max-w-3xl">
-          <p
-            className={`${geistMono.className} text-brand-navy text-lg font-semibold tracking-widest`}
-          >
-            CAPABILITIES
-          </p>
-          <h2
-            className={`${ebGaramond.className} text-brand-black text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
-          >
-            Six things we do properly
-          </h2>
-          <p className="font-sans text-brand-ink/80 text-lg leading-relaxed text-pretty">
-            Ranges below are typical, not fixed. Scope decides the number.
-          </p>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2">
-          {services.map((service) => (
+      {/* Service Cards */}
+      <section className="flex flex-col gap-6 md:gap-8">
+        <div className="grid gap-5 md:gap-6 sm:grid-cols-2">
+          {tServices.items.map((service) => (
             <ServiceCard key={service.slug} service={service} />
           ))}
         </div>
       </section>
 
-      <section className="flex flex-col gap-8">
+      {/* Process Section */}
+      <section className="flex flex-col gap-6 md:gap-8">
         <div className="flex flex-col gap-3 max-w-3xl">
           <p
-            className={`${geistMono.className} text-brand-navy text-lg font-semibold tracking-widest`}
+            className={`${isAr ? "font-bold text-xs" : geistMono.className} text-brand-navy text-xs md:text-sm font-semibold tracking-widest uppercase`}
           >
-            PROCESS
+            {tServices.processTitle}
           </p>
           <h2
-            className={`${ebGaramond.className} text-brand-black text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
+            className={`${isAr ? "font-bold font-sans-arabic" : ebGaramond.className} text-brand-black text-3xl sm:text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
           >
-            Five stages, no surprises
+            {tServices.processHeadline}
           </h2>
-          <p className="font-sans text-brand-ink/80 text-lg leading-relaxed text-pretty">
-            Same shape whether it&apos;s a two-week sprint or a six-month
-            platform.
-          </p>
         </div>
 
         <ProcessTimeline steps={process} />
       </section>
 
-      <CtaBlock label="NOT SURE WHICH ONE YOU NEED?" action="TALK IT THROUGH" />
+      <CtaBlock
+        label={isAr ? "لست متأكدًا من أي خدمة تناسبك؟" : "NOT SURE WHICH ONE YOU NEED?"}
+        action={isAr ? "تحدث مع فريقنا" : "TALK IT THROUGH"}
+      />
     </PageShell>
   );
 }

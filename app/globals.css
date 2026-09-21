@@ -47,6 +47,7 @@
   --font-mono: var(--font-geist-mono);
   --font-space: var(--font-space-mono);
   --font-serif: var(--font-eb-garamond);
+  --font-arabic: var(--font-cairo);
 
   /* Brand palette — blue family */
   --color-brand-black: #13293d; /* darkest bg */
