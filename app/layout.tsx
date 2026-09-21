@@ -14,6 +14,14 @@ export const metadata: Metadata = {
   title: "Fourth Edition — Software House | فورث إديشن للبرمجيات",
   description:
     "High-performance websites, web & mobile applications, CRM/ERP systems, branding, and marketing services.",
+  icons: {
+    icon: [
+      { url: "/logo.png", type: "image/png" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({
