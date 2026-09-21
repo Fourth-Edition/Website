@@ -65,7 +65,7 @@ export default function Home() {
             HAVE A PROJECT IN MIND? GET IN TOUCH
           </p>
           <a
-            href="mailto:hello@fourthedition.co"
+            href="mailto:4th.edition.org@gmail.com"
             className="px-6 py-3 rounded bg-brand-navy hover:bg-brand-light text-white text-xs font-mono tracking-widest transition-colors duration-300 shadow-lg border border-brand-slate/20 hover:border-brand-light"
           >
             CONTACT US

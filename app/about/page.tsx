@@ -12,7 +12,7 @@ import { intro, stats, team, timeline, values } from "../data/about";
 export const metadata: Metadata = {
   title: "About — Fourth Edition",
   description:
-    "A small software house building high-performance digital products and the brand systems around them.",
+    "An architectural software atelier delivering high-performance digital products and scalable enterprise systems.",
 };
 
 export default function AboutPage() {
@@ -26,64 +26,67 @@ export default function AboutPage() {
 
       <StatStrip stats={stats} />
 
+      {/* Philosophy & Values */}
       <section className="flex flex-col gap-8">
         <div className="flex flex-col gap-3 max-w-3xl">
           <p
-            className={`${geistMono.className} text-brand-navy text-lg font-semibold tracking-widest`}
+            className={`${geistMono.className} text-brand-navy text-sm font-semibold tracking-widest uppercase`}
           >
-            HOW WE WORK
+            OUR BRAND PHILOSOPHY
           </p>
           <h2
             className={`${ebGaramond.className} text-brand-black text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
           >
-            Four rules we don&apos;t bend
+            The &quot;4th Edition&quot; Standard
           </h2>
           <p className="font-sans text-brand-ink/80 text-lg leading-relaxed text-pretty">
-            They cost us work occasionally. They have never cost us a launch.
+            We skip traditional trial-and-error phases to deliver mature, production-grade solutions from day one.
           </p>
         </div>
 
         <ValueGrid values={values} />
       </section>
 
+      {/* History & Timeline */}
       <section className="flex flex-col gap-8">
         <div className="flex flex-col gap-3 max-w-3xl">
           <p
-            className={`${geistMono.className} text-brand-navy text-lg font-semibold tracking-widest`}
+            className={`${geistMono.className} text-brand-navy text-sm font-semibold tracking-widest uppercase`}
           >
-            HISTORY
+            COMPANY JOURNEY & MILESTONES
           </p>
           <h2
             className={`${ebGaramond.className} text-brand-black text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
           >
-            Where the studio has been
+            From January 2026 to Market Leadership
           </h2>
         </div>
 
         <TimelineList milestones={timeline} />
       </section>
 
+      {/* Team Nucleus */}
       <section className="flex flex-col gap-8">
         <div className="flex flex-col gap-3 max-w-3xl">
           <p
-            className={`${geistMono.className} text-brand-navy text-lg font-semibold tracking-widest`}
+            className={`${geistMono.className} text-brand-navy text-sm font-semibold tracking-widest uppercase`}
           >
-            TEAM
+            ENGINEERING NUCLEUS
           </p>
           <h2
             className={`${ebGaramond.className} text-brand-black text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
           >
-            The people on your project
+            Compact team, extreme execution
           </h2>
           <p className="font-sans text-brand-ink/80 text-lg leading-relaxed text-pretty">
-            Placeholder roster — names, photos, and bios still to come.
+            We operate as an agile technical nucleus where senior architectural engineers own your project end-to-end.
           </p>
         </div>
 
         <TeamGrid members={team} />
       </section>
 
-      <CtaBlock label="WANT TO WORK TOGETHER?" action="GET IN TOUCH" />
+      <CtaBlock label="READY TO BUILD WITH FOURTH EDITION?" action="GET IN TOUCH" />
     </PageShell>
   );
 }

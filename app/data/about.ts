@@ -1,6 +1,5 @@
 /**
- * Placeholder studio copy. Team members and figures are invented —
- * replace before launch.
+ * Authentic Fourth Edition Company Information & Story.
  */
 
 export interface AboutStat {
@@ -24,106 +23,75 @@ export interface TeamMember {
   name: string;
   role: string;
   focus: string;
-  /** Rendered in the avatar tile in place of a photo. */
   initials: string;
 }
 
 export const intro = {
-  eyebrow: "ABOUT US",
-  headline: "A small studio that finishes things.",
-  lede: "Fourth Edition is a software house building high-performance digital products and the brand systems around them. We work in small teams, ship on short cycles, and stay past launch.",
+  eyebrow: "ABOUT FOURTH EDITION",
+  headline: "Redefining software engineering & digital solutions.",
+  lede: "Founded in January 2026, Fourth Edition is an architectural software atelier. We skip traditional trial-and-error phases to deliver mature, production-ready software built by an elite, highly agile technical nucleus.",
 };
 
 export const stats: AboutStat[] = [
-  { label: "Founded", value: "2022" },
-  { label: "Projects shipped", value: "48" },
-  { label: "Average team size", value: "4" },
-  { label: "Clients retained", value: "86%" },
+  { label: "Founded", value: "Jan 2026" },
+  { label: "Projects Shipped", value: "5+" },
+  { label: "Maturity Phase", value: "Edition 4" },
+  { label: "Team Focus", value: "100% Lean" },
 ];
 
 export const values: StudioValue[] = [
   {
     index: "01",
-    title: "No first drafts",
+    title: "Stage 4 Maturity from Day One",
     description:
-      "The version you see is the version we would ship. Everything before that stays in the branch.",
+      "Derived from our name '4th Edition' — we bypass the 3 basic development stages (planning, trial, initial dev) to deliver fully mature, future-proof software.",
   },
   {
     index: "02",
-    title: "Small teams, short cycles",
+    title: "Lean High-Efficiency Nucleus",
     description:
-      "Four people who own the whole problem beat twelve who each own a slice of it. Two-week cycles, always a live URL.",
+      "A compact team of elite engineers beats bloated departments. Extreme agility, rapid decision-making, and zero execution delay.",
   },
   {
     index: "03",
-    title: "Performance is a feature",
+    title: "Systematic Design & Architecture",
     description:
-      "Budgets are set at kickoff and enforced in CI. A slow build is an unfinished build.",
+      "We pair meticulous architectural planning with modern, clean code to tailor solutions precisely to client requirements.",
   },
   {
     index: "04",
-    title: "We stay past launch",
+    title: "Built for Rapid Execution",
     description:
-      "Handover includes documentation your team can act on, and we watch the numbers with you for the first month.",
+      "Innovative, flexible software solutions designed to help ambitious businesses thrive in a fast-paced technology landscape.",
   },
 ];
 
 export const timeline: Milestone[] = [
   {
-    year: "2022",
-    title: "Studio founded",
+    year: "Jan 2026",
+    title: "The Launch & Core Foundation (البداية والانطلاق)",
     description:
-      "Three engineers and a designer, one shared office, and a first client who needed a storefront rebuilt in six weeks.",
+      "Founded with an ambitious vision to redefine software services. Assembled a high-competency technical nucleus prioritizing efficiency, rapid decision-making, and execution over bloated team size.",
   },
   {
-    year: "2023",
-    title: "Design practice added",
+    year: "Early 2026",
+    title: "The '4th Edition' Philosophy (التطور وبناء الهوية)",
     description:
-      "Brand and product design brought in-house so identity and build stop being separate conversations.",
-  },
-  {
-    year: "2024",
-    title: "First enterprise rollout",
-    description:
-      "A bespoke CRM replacing nine years of spreadsheets — and the start of our systems practice.",
-  },
-  {
-    year: "2025",
-    title: "Mobile team formed",
-    description:
-      "A dedicated cross-platform group, launched off the back of two consecutive store approvals on first submission.",
+      "Established the brand identity around '4th Edition' — symbolizing full professional maturity, skipping basic trial phases directly to production-ready software. Combined systematic design with modern code bases.",
   },
   {
     year: "2026",
-    title: "Fourth Edition, fourth edition",
+    title: "Expansion & 5+ Shipped Products (التوسع والإنجازات)",
     description:
-      "The studio site rebuilt from scratch. Codebase actively compiled.",
+      "Proved market reliability and competitive strength by engineering and launching over 5 successful software systems across enterprise CRM, medical portals, and high-performance web platforms.",
   },
 ];
 
 export const team: TeamMember[] = [
   {
-    name: "Placeholder One",
-    role: "Founder & Principal Engineer",
-    focus: "Architecture, performance, delivery",
-    initials: "P1",
-  },
-  {
-    name: "Placeholder Two",
-    role: "Design Director",
-    focus: "Brand systems, product design",
-    initials: "P2",
-  },
-  {
-    name: "Placeholder Three",
-    role: "Lead Engineer, Mobile",
-    focus: "React Native, offline-first systems",
-    initials: "P3",
-  },
-  {
-    name: "Placeholder Four",
-    role: "Engagement Lead",
-    focus: "Scoping, rollout, client comms",
-    initials: "P4",
+    name: "Engineering Nucleus",
+    role: "Architectural & Technical Leadership",
+    focus: "Full-Stack Architecture, System Design & Rapid Delivery",
+    initials: "4E",
   },
 ];
