@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { notFound, useParams } from "next/navigation";
 import PageShell from "../../components/page/PageShell";
 import PageHeader from "../../components/page/PageHeader";
@@ -58,11 +59,16 @@ export default function ProjectPage() {
               {displayClient} — {displayTitle}
             </div>
           </div>
-          <img
-            src={project.coverImage}
-            alt={displayTitle}
-            className="w-full h-auto object-cover max-h-[640px]"
-          />
+          <div className="relative w-full aspect-[16/9] max-h-[640px] overflow-hidden">
+            <Image
+              src={project.coverImage}
+              alt={displayTitle}
+              width={1200}
+              height={675}
+              priority
+              className="w-full h-auto object-cover max-h-[640px]"
+            />
+          </div>
         </div>
       )}
 
@@ -156,11 +162,12 @@ export default function ProjectPage() {
                   <span>{isAr ? `شاشة ${index + 1}` : `View 0${index + 1}`}</span>
                   <span className="text-[10px] uppercase bg-slate-200 px-2 py-0.5 rounded">Screenshot</span>
                 </div>
-                <img
+                <Image
                   src={imgUrl}
                   alt={`${displayTitle} screenshot ${index + 1}`}
+                  width={800}
+                  height={500}
                   className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-300"
-                  loading="lazy"
                 />
               </div>
             ))}

@@ -1,13 +1,17 @@
 "use client";
 
 import { useRef } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { geistMono, ebGaramond } from "../fonts";
-import TerminalPanel from "./TerminalPanel";
 import { useLanguage } from "../context/LanguageContext";
 import { dictionary } from "../data/translations";
+
+const TerminalPanel = dynamic(() => import("./TerminalPanel"), {
+  ssr: false,
+});
 
 interface HeroProps {
   play: boolean;

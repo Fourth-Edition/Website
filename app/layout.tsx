@@ -5,10 +5,14 @@ import Footer from "./components/footer";
 import { geistMono, ebGaramond, cairo } from "./fonts";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
-import DotField from "@/components/DotField";
 import { LanguageProvider } from "./context/LanguageContext";
+import ClientDotField from "@/components/ClientDotField";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Fourth Edition — Software House | فورث إديشن للبرمجيات",
@@ -45,7 +49,7 @@ export default function RootLayout({
       <body className={`min-h-screen flex flex-col`}>
         <LanguageProvider>
           <NavBar />
-          <DotField
+          <ClientDotField
             glowColor="transparent"
             color="#18435a"
             dotRadius={2}
@@ -59,3 +63,4 @@ export default function RootLayout({
     </html>
   );
 }
+
