@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { geistMono } from "../fonts";
@@ -105,9 +106,12 @@ export default function NavBar() {
           href="/"
           className="flex items-center gap-2.5 group"
         >
-          <img
+          <Image
             src="/logo.png"
             alt="Fourth Edition Logo"
+            width={32}
+            height={32}
+            priority
             className="w-7 h-7 sm:w-8 sm:h-8 object-contain rounded-full border border-cyan-500/40 shadow-sm group-hover:scale-105 transition-transform duration-300 shrink-0"
           />
           <span

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { phone, socialLinks } from "../data/contact";
 import { useLanguage } from "../context/LanguageContext";
 import { dictionary } from "../data/translations";
@@ -13,9 +14,11 @@ export default function Footer() {
       {/* Top row: copyright + remote */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="flex items-center gap-2.5">
-          <img
+          <Image
             src="/logo.png"
             alt="Fourth Edition Logo"
+            width={20}
+            height={20}
             className="w-5 h-5 object-contain rounded-full border border-cyan-500/40 shrink-0"
           />
           <span className="text-center sm:text-left">{tFooter.rights}</span>

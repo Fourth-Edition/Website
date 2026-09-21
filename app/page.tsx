@@ -1,16 +1,28 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import IntroScreen from "./components/IntroScreen";
 import Hero from "./components/Hero";
-import MobileShowcase from "./components/mobile-showcase/MobileShowcase";
-import WebShowcase from "./components/web-showcase/WebShowcase";
 import ShowcaseSection from "./components/showcase/ShowcaseSection";
 import ShowcaseCard from "./components/showcase/ShowcaseCard";
 import { useLanguage } from "./context/LanguageContext";
 import { dictionary } from "./data/translations";
 import { geistMono } from "./fonts";
+
+const IntroScreen = dynamic(() => import("./components/IntroScreen"), {
+  ssr: false,
+});
+
+const MobileShowcase = dynamic(
+  () => import("./components/mobile-showcase/MobileShowcase"),
+  { ssr: false }
+);
+
+const WebShowcase = dynamic(
+  () => import("./components/web-showcase/WebShowcase"),
+  { ssr: false }
+);
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
