@@ -35,7 +35,7 @@ export const socialLinks: SocialLink[] = [
   },
   {
     name: "Facebook",
-    url: "https://www.facebook.com/profile.php?id=61585518672250#",
+    url: "https://www.facebook.com/fourthEdition.software",
     handle: "Fourth Edition Software",
   },
   {
