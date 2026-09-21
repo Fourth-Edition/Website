@@ -30,9 +30,9 @@ export default function PageHeader({
   }, []);
 
   return (
-    <header className="flex flex-col gap-6 max-w-4xl">
+    <header className="flex flex-col gap-4 md:gap-6 max-w-4xl">
       <p
-        className={`${geistMono.className} text-brand-navy text-lg font-semibold tracking-widest`}
+        className={`${geistMono.className} text-brand-navy text-sm md:text-lg font-semibold tracking-widest`}
       >
         {text}
       </p>
@@ -40,13 +40,13 @@ export default function PageHeader({
       {/* Dark ink, not brand-light — the light blue washes out against the
           page background once the type gets this large. */}
       <h1
-        className={`${ebGaramond.className} text-brand-black text-6xl md:text-8xl leading-[1.05] tracking-tight text-balance`}
+        className={`${ebGaramond.className} text-brand-black text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight text-balance`}
       >
         {headline}
       </h1>
 
       {lede && (
-        <p className="font-sans text-brand-ink/80 text-lg md:text-xl leading-relaxed max-w-2xl text-pretty">
+        <p className="font-sans text-brand-ink/80 text-base md:text-lg lg:text-xl leading-relaxed max-w-2xl text-pretty">
           {lede}
         </p>
       )}

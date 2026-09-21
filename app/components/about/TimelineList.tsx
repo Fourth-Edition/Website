@@ -1,12 +1,16 @@
+"use client";
+
 import { geistMono } from "../../fonts";
 import type { Milestone } from "../../data/about";
+import { useLanguage } from "../../context/LanguageContext";
 
-/** Studio history, year on the left, milestone on the right. */
 export default function TimelineList({
   milestones,
 }: {
   milestones: Milestone[];
 }) {
+  const { isAr } = useLanguage();
+
   return (
     <ol className="flex flex-col">
       {milestones.map((milestone) => (
@@ -21,11 +25,11 @@ export default function TimelineList({
             {milestone.year}
           </span>
           <div className="flex flex-col gap-2">
-            <h3 className="font-sans text-brand-black text-xl tracking-tight">
-              {milestone.title}
+            <h3 className={`${isAr ? "font-bold text-xl font-sans-arabic" : "font-sans text-xl"} text-brand-black tracking-tight`}>
+              {isAr && milestone.titleAr ? milestone.titleAr : milestone.title}
             </h3>
-            <p className="font-sans text-brand-ink/80 text-lg leading-relaxed max-w-2xl text-pretty">
-              {milestone.description}
+            <p className="font-sans text-brand-ink/80 text-base leading-relaxed max-w-2xl text-pretty">
+              {isAr && milestone.descriptionAr ? milestone.descriptionAr : milestone.description}
             </p>
           </div>
         </li>

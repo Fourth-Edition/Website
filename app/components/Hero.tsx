@@ -1,13 +1,15 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { geistMono, ebGaramond } from "../fonts";
 import TerminalPanel from "./TerminalPanel";
+import { useLanguage } from "../context/LanguageContext";
+import { dictionary } from "../data/translations";
 
 interface HeroProps {
-  /** Flips true once the intro overlay has cleared and the hero is actually visible. */
   play: boolean;
 }
 
@@ -18,11 +20,6 @@ type HeroRefs = {
   terminal: React.RefObject<HTMLDivElement | null>;
 };
 
-/**
- * One entrance, staggered top to bottom. Gated on `play` rather than
- * mount, since the hero mounts (hidden) well before the intro overlay
- * clears — animating on mount would finish before anyone could see it.
- */
 function useHeroEntrance(play: boolean, refs: HeroRefs) {
   useGSAP(
     () => {
@@ -53,6 +50,9 @@ export default function Hero({ play }: HeroProps) {
   const ctaRef = useRef<HTMLAnchorElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
+  const { locale, isAr } = useLanguage();
+  const tHero = dictionary[locale].hero;
+
   useHeroEntrance(play, {
     headline: headlineRef,
     subheadline: subheadlineRef,
@@ -61,31 +61,30 @@ export default function Hero({ play }: HeroProps) {
   });
 
   return (
-    <div className="relative min-h-screen w-full flex flex-col justify-center px-6 md:px-16 py-24">
-      <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+    <div className="relative min-h-screen w-full flex flex-col justify-center px-4 sm:px-6 md:px-16 py-16 md:py-24">
+      <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-10 lg:gap-20 items-center">
         <div className="max-w-2xl">
           <h1
             ref={headlineRef}
-            className={`${ebGaramond.className} text-brand-light text-4xl md:text-6xl lg:text-7xl leading-[1.1]`}
+            className={`${isAr ? "font-bold font-sans-arabic" : ebGaramond.className} text-brand-light text-3xl sm:text-4xl md:text-6xl lg:text-7xl leading-[1.15]`}
           >
-            We don’t ship first drafts.
+            {tHero.headline}
           </h1>
 
           <p
             ref={subheadlineRef}
-            className="font-sans text-brand-slate text-sm md:text-base leading-relaxed mt-6 max-w-md"
+            className="font-sans text-brand-slate text-sm sm:text-base md:text-lg leading-relaxed mt-5 md:mt-6 max-w-lg"
           >
-            Fourth Edition designs and engineers websites, mobile apps, and
-            internal systems for companies that expect their software to perform.
+            {tHero.subheadline}
           </p>
 
-          <a
+          <Link
             ref={ctaRef}
-            href="mailto:hello@fourthedition.co"
-            className={`${geistMono.className} inline-block mt-10 px-6 py-3 rounded bg-brand-navy hover:bg-brand-light text-white text-xs tracking-widest transition-colors duration-300 border border-brand-slate/20 hover:border-brand-light`}
+            href="/contact"
+            className={`${isAr ? "font-bold text-sm" : geistMono.className} inline-block mt-8 md:mt-10 px-6 py-3.5 rounded bg-brand-navy hover:bg-brand-light text-white text-xs tracking-widest transition-colors duration-300 border border-brand-slate/20 hover:border-brand-light shadow-lg w-full sm:w-auto text-center`}
           >
-            START A PROJECT
-          </a>
+            {tHero.cta}
+          </Link>
         </div>
 
         <div ref={terminalRef} className="hidden md:block">

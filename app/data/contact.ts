@@ -1,6 +1,5 @@
 /**
- * Placeholder contact details and form options. The form itself does not
- * submit anywhere yet — wire it to a route handler or form service later.
+ * Official Fourth Edition Contact Details, Social Channels & FAQs.
  */
 
 export interface Channel {
@@ -8,6 +7,13 @@ export interface Channel {
   value: string;
   href: string;
   note: string;
+  isExternal?: boolean;
+}
+
+export interface SocialLink {
+  name: string;
+  url: string;
+  handle: string;
 }
 
 export interface Faq {
@@ -15,24 +21,43 @@ export interface Faq {
   answer: string;
 }
 
+export const phone = {
+  display: "+20 10 42256411",
+  telHref: "tel:+201042256411",
+  whatsappHref: "https://wa.me/201042256411",
+};
+
+export const socialLinks: SocialLink[] = [
+  {
+    name: "WhatsApp",
+    url: "https://wa.me/201042256411",
+    handle: "+20 10 42256411",
+  },
+  {
+    name: "Facebook",
+    url: "https://www.facebook.com/profile.php?id=61585518672250#",
+    handle: "Fourth Edition Software",
+  },
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/4.th.editionn/",
+    handle: "@4.th.editionn",
+  },
+];
+
 export const channels: Channel[] = [
   {
-    label: "New projects",
-    value: "hello@fourthedition.co",
-    href: "mailto:hello@fourthedition.co",
-    note: "Scoping questions, quotes, and timelines. We reply within one working day.",
+    label: "Phone & WhatsApp",
+    value: "+20 10 42256411",
+    href: "https://wa.me/201042256411",
+    note: "Instant WhatsApp messaging or direct call. We reply within working hours.",
+    isExternal: true,
   },
   {
-    label: "Existing clients",
-    value: "support@fourthedition.co",
-    href: "mailto:support@fourthedition.co",
-    note: "Live-site issues and change requests. Priority queue for retainer clients.",
-  },
-  {
-    label: "Careers",
-    value: "work@fourthedition.co",
-    href: "mailto:work@fourthedition.co",
-    note: "No open roles right now, but we read everything that comes in.",
+    label: "Official Email",
+    value: "4th.edition.org@gmail.com",
+    href: "mailto:4th.edition.org@gmail.com",
+    note: "Scoping questions, quotes, and project timelines. We reply within one working day.",
   },
 ];
 
@@ -46,11 +71,11 @@ export const projectTypes: string[] = [
 ];
 
 export const budgets: string[] = [
-  "Under $10k",
-  "$10k – $25k",
-  "$25k – $50k",
-  "$50k – $100k",
-  "$100k+",
+  "Under 50,000 EGP",
+  "50,000 – 100,000 EGP",
+  "100,000 – 250,000 EGP",
+  "250,000 – 500,000 EGP",
+  "500,000+ EGP",
   "Not sure yet",
 ];
 
@@ -63,9 +88,14 @@ export const timelines: string[] = [
 
 export const faqs: Faq[] = [
   {
+    question: "How does working with a fully remote company work?",
+    answer:
+      "We operate transparently with daily async check-ins, continuous live staging URLs, and dedicated communication channels (WhatsApp, Slack, or email).",
+  },
+  {
     question: "How quickly can you start?",
     answer:
-      "Usually within two to three weeks. Sprint engagements can sometimes start sooner if a slot opens up.",
+      "Usually within two to three weeks. Urgent sprint engagements can sometimes start sooner if a slot opens up.",
   },
   {
     question: "Do you work with fixed prices?",
@@ -77,15 +107,10 @@ export const faqs: Faq[] = [
     answer:
       "You do, from the first commit. Repositories live in your organisation and we work in it as collaborators.",
   },
-  {
-    question: "Can you take over an existing build?",
-    answer:
-      "Often. We start with a paid audit so both sides know what the codebase actually looks like before committing to anything.",
-  },
 ];
 
 export const studio = {
-  location: "Remote-first · Central European Time",
-  hours: "Mon–Fri, 09:00–18:00 CET",
-  responseTime: "Within one working day",
+  location: "Fully Remote Company",
+  hours: "Sun–Thu, 09:00–18:00 (GMT+2 / EET)",
+  responseTime: "Within a few hours",
 };

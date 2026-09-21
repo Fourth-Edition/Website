@@ -1,16 +1,23 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import IntroScreen from "./components/IntroScreen";
 import Hero from "./components/Hero";
 import MobileShowcase from "./components/mobile-showcase/MobileShowcase";
 import WebShowcase from "./components/web-showcase/WebShowcase";
 import ShowcaseSection from "./components/showcase/ShowcaseSection";
 import ShowcaseCard from "./components/showcase/ShowcaseCard";
+import { useLanguage } from "./context/LanguageContext";
+import { dictionary } from "./data/translations";
+import { geistMono } from "./fonts";
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
   const [mounted, setMounted] = useState(false);
+  const { locale, isAr } = useLanguage();
+  const tShowcase = dictionary[locale].showcase;
+  const tNav = dictionary[locale].nav;
 
   useEffect(() => {
     setMounted(true);
@@ -21,7 +28,6 @@ export default function Home() {
   }, []);
 
   const handleIntroComplete = () => {
-    // sessionStorage.setItem("fe_intro_completed", "true");
     setShowIntro(false);
   };
 
@@ -43,33 +49,33 @@ export default function Home() {
         {/* What we build */}
         <ShowcaseSection>
           <ShowcaseCard
-            label="MOBILE APPLICATIONS"
-            description="Make your custom mobile app shine with a sleek, modern design. Our showcase highlights the intuitive interface and seamless user experience, ensuring your app stands out in the competitive market."
-            ctaText="Convert your idea into the real world"
+            label={tShowcase.mobileLabel}
+            description={tShowcase.mobileDesc}
+            ctaText={tShowcase.mobileCta}
           >
             <MobileShowcase />
           </ShowcaseCard>
 
           <ShowcaseCard
-            label="WEB APPLICATIONS"
-            description="From CRMs to internal dashboards, we build web apps that turn raw data into decisions — pipelines, reports, and the systems your team runs on every day."
-            ctaText="See how your data could work for you"
+            label={tShowcase.webLabel}
+            description={tShowcase.webDesc}
+            ctaText={tShowcase.webCta}
           >
             <WebShowcase />
           </ShowcaseCard>
         </ShowcaseSection>
 
         {/* Contact CTA */}
-        <div className="pb-24 px-6 flex flex-col items-center text-center space-y-4">
-          <p className="text-sm font-mono text-brand-slate tracking-widest">
-            HAVE A PROJECT IN MIND? GET IN TOUCH
+        <div className="pb-16 md:pb-24 px-4 sm:px-6 flex flex-col items-center text-center space-y-4">
+          <p className={`${isAr ? "font-bold text-base" : geistMono.className} text-brand-slate tracking-widest text-sm md:text-base`}>
+            {isAr ? "لديك مشروع تريد بناءه؟" : "HAVE A PROJECT IN MIND? GET IN TOUCH"}
           </p>
-          <a
-            href="mailto:hello@fourthedition.co"
-            className="px-6 py-3 rounded bg-brand-navy hover:bg-brand-light text-white text-xs font-mono tracking-widest transition-colors duration-300 shadow-lg border border-brand-slate/20 hover:border-brand-light"
+          <Link
+            href="/contact"
+            className={`${isAr ? "font-bold text-sm font-sans-arabic" : geistMono.className} px-6 py-3.5 rounded bg-brand-navy hover:bg-brand-light text-white text-xs tracking-widest transition-colors duration-300 shadow-lg border border-brand-slate/20 hover:border-brand-light w-full sm:w-auto text-center`}
           >
-            CONTACT US
-          </a>
+            {tNav.contact}
+          </Link>
         </div>
       </div>
     </>

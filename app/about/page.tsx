@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client";
+
 import PageShell from "../components/page/PageShell";
 import PageHeader from "../components/page/PageHeader";
 import CtaBlock from "../components/page/CtaBlock";
@@ -7,83 +8,88 @@ import ValueGrid from "../components/about/ValueGrid";
 import TimelineList from "../components/about/TimelineList";
 import TeamGrid from "../components/about/TeamGrid";
 import { ebGaramond, geistMono } from "../fonts";
-import { intro, stats, team, timeline, values } from "../data/about";
-
-export const metadata: Metadata = {
-  title: "About — Fourth Edition",
-  description:
-    "A small software house building high-performance digital products and the brand systems around them.",
-};
+import { stats, team, timeline, values } from "../data/about";
+import { useLanguage } from "../context/LanguageContext";
+import { dictionary } from "../data/translations";
 
 export default function AboutPage() {
+  const { locale, isAr } = useLanguage();
+  const tAbout = dictionary[locale].about;
+
   return (
     <PageShell>
       <PageHeader
-        eyebrow={intro.eyebrow}
-        headline={intro.headline}
-        lede={intro.lede}
+        eyebrow={tAbout.eyebrow}
+        headline={tAbout.headline}
+        lede={tAbout.lede}
       />
 
       <StatStrip stats={stats} />
 
-      <section className="flex flex-col gap-8">
+      {/* Philosophy & Values */}
+      <section className="flex flex-col gap-6 md:gap-8">
         <div className="flex flex-col gap-3 max-w-3xl">
           <p
-            className={`${geistMono.className} text-brand-navy text-lg font-semibold tracking-widest`}
+            className={`${isAr ? "font-bold text-xs" : geistMono.className} text-brand-navy text-xs md:text-sm font-semibold tracking-widest uppercase`}
           >
-            HOW WE WORK
+            {tAbout.philosophyTitle}
           </p>
           <h2
-            className={`${ebGaramond.className} text-brand-black text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
+            className={`${isAr ? "font-bold font-sans-arabic" : ebGaramond.className} text-brand-black text-3xl sm:text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
           >
-            Four rules we don&apos;t bend
+            {tAbout.philosophyHeadline}
           </h2>
-          <p className="font-sans text-brand-ink/80 text-lg leading-relaxed text-pretty">
-            They cost us work occasionally. They have never cost us a launch.
+          <p className="font-sans text-brand-ink/80 text-base leading-relaxed text-pretty">
+            {tAbout.philosophyLede}
           </p>
         </div>
 
         <ValueGrid values={values} />
       </section>
 
-      <section className="flex flex-col gap-8">
+      {/* History & Timeline */}
+      <section className="flex flex-col gap-6 md:gap-8">
         <div className="flex flex-col gap-3 max-w-3xl">
           <p
-            className={`${geistMono.className} text-brand-navy text-lg font-semibold tracking-widest`}
+            className={`${isAr ? "font-bold text-xs" : geistMono.className} text-brand-navy text-xs md:text-sm font-semibold tracking-widest uppercase`}
           >
-            HISTORY
+            {tAbout.journeyTitle}
           </p>
           <h2
-            className={`${ebGaramond.className} text-brand-black text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
+            className={`${isAr ? "font-bold font-sans-arabic" : ebGaramond.className} text-brand-black text-3xl sm:text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
           >
-            Where the studio has been
+            {tAbout.journeyHeadline}
           </h2>
         </div>
 
         <TimelineList milestones={timeline} />
       </section>
 
-      <section className="flex flex-col gap-8">
+      {/* Team Nucleus */}
+      <section className="flex flex-col gap-6 md:gap-8">
         <div className="flex flex-col gap-3 max-w-3xl">
           <p
-            className={`${geistMono.className} text-brand-navy text-lg font-semibold tracking-widest`}
+            className={`${isAr ? "font-bold text-xs" : geistMono.className} text-brand-navy text-xs md:text-sm font-semibold tracking-widest uppercase`}
           >
-            TEAM
+            {tAbout.nucleusTitle}
           </p>
           <h2
-            className={`${ebGaramond.className} text-brand-black text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
+            className={`${isAr ? "font-bold font-sans-arabic" : ebGaramond.className} text-brand-black text-3xl sm:text-4xl md:text-5xl leading-tight tracking-tight text-balance`}
           >
-            The people on your project
+            {tAbout.nucleusHeadline}
           </h2>
-          <p className="font-sans text-brand-ink/80 text-lg leading-relaxed text-pretty">
-            Placeholder roster — names, photos, and bios still to come.
+          <p className="font-sans text-brand-ink/80 text-base leading-relaxed text-pretty">
+            {tAbout.nucleusLede}
           </p>
         </div>
 
         <TeamGrid members={team} />
       </section>
 
-      <CtaBlock label="WANT TO WORK TOGETHER?" action="GET IN TOUCH" />
+      <CtaBlock
+        label={isAr ? "مستعد للبناء مع فورث إديشن؟" : "READY TO BUILD WITH FOURTH EDITION?"}
+        action={isAr ? "تواصل معنا" : "GET IN TOUCH"}
+      />
     </PageShell>
   );
 }
