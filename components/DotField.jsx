@@ -30,6 +30,7 @@ const DotField = memo(({
   const sizeRef = useRef({ w: 0, h: 0, offsetX: 0, offsetY: 0 });
   const glowOpacity = useRef(0);
   const engagement = useRef(0);
+  const frameCountRef = useRef(0);
   const propsRef = useRef({});
   propsRef.current = { dotRadius, dotSpacing, cursorRadius, cursorForce, bulgeOnly, bulgeStrength, sparkle, waveAmplitude, gradientFrom, gradientTo };
   const rebuildRef = useRef(null);
@@ -140,13 +141,13 @@ const DotField = memo(({
         rafRef.current = null;
         return;
       }
-      frameCount++;
+      frameCountRef.current++;
       const dots = dotsRef.current;
       const m = mouseRef.current;
       const { w, h } = sizeRef.current;
       const p = propsRef.current;
       const len = dots.length;
-      const t = frameCount * 0.02;
+      const t = frameCountRef.current * 0.02;
 
       const targetEngagement = Math.min(m.speed / 5, 1);
       engagement.current += (targetEngagement - engagement.current) * 0.06;
@@ -217,7 +218,7 @@ const DotField = memo(({
         }
 
         if (p.sparkle) {
-          const hash = ((i * 2654435761) ^ (frameCount >> 3)) >>> 0;
+          const hash = ((i * 2654435761) ^ (frameCountRef.current >> 3)) >>> 0;
           if ((hash % 100) < 3) {
             ctx.moveTo(drawX + rad * 1.8, drawY);
             ctx.arc(drawX, drawY, rad * 1.8, 0, TWO_PI);
