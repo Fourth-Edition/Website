@@ -140,6 +140,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={cn(
         "h-screen",
         "antialiased",
@@ -156,7 +157,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`min-h-screen flex flex-col`}>
+      <body suppressHydrationWarning className={`min-h-screen flex flex-col`}>
         <LanguageProvider>
           <NavBar />
           <ClientDotField
